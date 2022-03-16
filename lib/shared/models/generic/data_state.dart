@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:leo_financial/shared/models/failure.dart';
+import 'package:leo_financial/shared/models/generic/failure.dart';
 import 'package:mobx/mobx.dart';
 part 'data_state.g.dart';
 
