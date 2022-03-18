@@ -3,7 +3,7 @@ import 'package:leo_financial/shared/models/generic/failure.dart';
 import 'package:mobx/mobx.dart';
 part 'data_state.g.dart';
 
-enum StateType { INITIAL, SUCCESS, RELOADING, ERROR }
+enum StateType { initial, success, reloading, error }
 
 typedef Initial = Widget Function();
 typedef Error = Widget Function(Failure? error);
@@ -17,7 +17,7 @@ typedef ErrorResult = void Function(Failure? error);
 class DataState<T> = _DataStateBase<T> with _$DataState;
 
 abstract class _DataStateBase<T> with Store {
-  _DataStateBase({StateType state = StateType.INITIAL}) : _state = state;
+  _DataStateBase({StateType state = StateType.initial}) : _state = state;
 
   @observable
   StateType _state;
@@ -32,31 +32,31 @@ abstract class _DataStateBase<T> with Store {
 
   @action
   void setInitial() {
-    _state = StateType.INITIAL;
+    _state = StateType.initial;
   }
 
   @action
   void setLoading() {
-    _state = StateType.RELOADING;
+    _state = StateType.reloading;
   }
 
   @action
   void setData(T data) {
-    _state = StateType.SUCCESS;
+    _state = StateType.success;
     _data = data;
   }
 
   @action
   void setError(Failure error) {
-    _state = StateType.ERROR;
+    _state = StateType.error;
     _error = error;
   }
 
   Widget handleState(Initial initial, Success<T> success, [Error? error]) {
     switch (_state) {
-      case StateType.INITIAL:
+      case StateType.initial:
         return initial();
-      case StateType.ERROR:
+      case StateType.error:
         if (error == null) {
           return const SizedBox();
         } else {
@@ -71,10 +71,10 @@ abstract class _DataStateBase<T> with Store {
       Initial initial, SuccessReloadable<T> successReloadable,
       [Error? error]) {
     switch (_state) {
-      case StateType.INITIAL:
+      case StateType.initial:
         return initial();
 
-      case StateType.ERROR:
+      case StateType.error:
         if (error == null) {
           return const SizedBox();
         } else {
@@ -82,7 +82,7 @@ abstract class _DataStateBase<T> with Store {
         }
 
       default:
-        return successReloadable(_data, _state == StateType.RELOADING);
+        return successReloadable(_data, _state == StateType.reloading);
     }
   }
 
@@ -92,19 +92,19 @@ abstract class _DataStateBase<T> with Store {
       ErrorResult? error}) {
     return reaction((_) => _state, (_) {
       switch (_state) {
-        case StateType.RELOADING:
+        case StateType.reloading:
           if (loadingResult != null) loadingResult(true);
           break;
-        case StateType.ERROR:
+        case StateType.error:
           if (loadingResult != null) loadingResult(false);
           if (error != null) error(_error);
           break;
-        case StateType.SUCCESS:
+        case StateType.success:
           if (loadingResult != null) loadingResult(false);
           if (successResult != null) successResult(_data);
           break;
 
-        case StateType.INITIAL:
+        case StateType.initial:
           break;
       }
     });

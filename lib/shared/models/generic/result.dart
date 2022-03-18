@@ -13,7 +13,8 @@ class Result<T> {
   bool get isError => this is FailureResult<T>;
 
   T? get data => this is SuccessResult ? (this as SuccessResult).value : null;
-  get error => this is FailureResult ? (this as FailureResult).error : null;
+  dynamic get error =>
+      this is FailureResult ? (this as FailureResult).error : null;
 
   //Verificar se funciona
   R result<R>(Success<R, T> success, Error<R> error) {
@@ -32,9 +33,9 @@ class SuccessResult<T> extends Result<T> {
 }
 
 class FailureResult<T> extends Result<T> {
-  FailureResult(this.error) : super._();
+  FailureResult(this.err) : super._();
 
-  final Failure error;
+  final Failure err;
 }
 
 extension FutureExtension<T> on Future<Result<T>> {

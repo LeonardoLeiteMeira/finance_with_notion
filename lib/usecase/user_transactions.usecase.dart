@@ -11,15 +11,15 @@ class UserTransactionUsecase extends BaseUsecase {
         var transactionList = <UserTransaction>[];
 
         transactionList
-            .add(UserTransaction(1, "Ticket", 50.0, TransactionType.CREDIT));
+            .add(UserTransaction(1, "Ticket", 50.0, TransactionType.credit));
         transactionList
-            .add(UserTransaction(2, "T-Shirt", 60.0, TransactionType.CREDIT));
+            .add(UserTransaction(2, "T-Shirt", 60.0, TransactionType.credit));
         transactionList
-            .add(UserTransaction(3, "Uber", 30.0, TransactionType.CREDIT));
+            .add(UserTransaction(3, "Uber", 30.0, TransactionType.credit));
         transactionList
-            .add(UserTransaction(4, "Dinner", 40.0, TransactionType.CREDIT));
+            .add(UserTransaction(4, "Dinner", 40.0, TransactionType.credit));
         transactionList
-            .add(UserTransaction(5, "Salary", 9000.0, TransactionType.REVENUE));
+            .add(UserTransaction(5, "Salary", 9000.0, TransactionType.revenue));
 
         return transactionList;
       });
