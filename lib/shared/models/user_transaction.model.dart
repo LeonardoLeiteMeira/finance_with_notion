@@ -5,6 +5,8 @@ class UserTransaction {
   String description;
   double value;
   TransactionType transactionType;
+  DateTime date;
 
-  UserTransaction(this.id, this.description, this.value, this.transactionType);
+  UserTransaction(
+      this.id, this.description, this.value, this.transactionType, this.date);
 }

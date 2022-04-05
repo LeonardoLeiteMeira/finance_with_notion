@@ -1,5 +1,7 @@
 import 'package:leo_financial/shared/models/generic/failure.dart';
 
+import 'data_state.dart';
+
 typedef Success<R, T> = R Function(T data);
 typedef Error<R> = R Function(dynamic error);
 
@@ -14,9 +16,9 @@ class Result<T> {
 
   T? get data => this is SuccessResult ? (this as SuccessResult).value : null;
   dynamic get error =>
-      this is FailureResult ? (this as FailureResult).error : null;
+      this is FailureResult ? (this as FailureResult).err : null;
 
-  //Verificar se funciona
+  ///Return success with data when success, and return error with FailureResult.error when error
   R result<R>(Success<R, T> success, Error<R> error) {
     if (isSuccess) {
       return success((this as SuccessResult).data);
@@ -46,6 +48,15 @@ extension FutureExtension<T> on Future<Result<T>> {
       return success((res as SuccessResult<T>).value);
     } else {
       return error((res as FailureResult).error);
+    }
+  }
+
+  Future resultCompleteSet(DataState<T> dataState) async {
+    var res = await this;
+    if (res.isSuccess) {
+      dataState.setData((res as SuccessResult<T>).value);
+    } else {
+      dataState.setError((res as FailureResult).err);
     }
   }
 }

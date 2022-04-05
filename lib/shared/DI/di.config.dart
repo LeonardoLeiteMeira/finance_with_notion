@@ -7,7 +7,8 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../pages/initial/initial.controller.dart'
+import '../../pages/initial/initial.controller.dart' as _i4;
+import '../../usecase/user_transactions.usecase.dart'
     as _i3; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -15,6 +16,8 @@ import '../../pages/initial/initial.controller.dart'
 _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
-  gh.lazySingleton<_i3.InitialController>(() => _i3.InitialController());
+  gh.factory<_i3.UserTransactionUsecase>(() => _i3.UserTransactionUsecase());
+  gh.lazySingleton<_i4.InitialController>(
+      () => _i4.InitialController(get<_i3.UserTransactionUsecase>()));
   return get;
 }
