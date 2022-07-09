@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:leo_financial/shared/models/enum/transaction_type.dart';
-import 'package:leo_financial/shared/models/user_transaction.model.dart';
-import 'package:leo_financial/shared/models/generic/date_extension.dart';
+import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
+import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
+import 'package:finance_with_notion/shared/models/generic/date_extension.dart';
 
 class TransactionWidget extends StatelessWidget {
   final UserTransaction _userTransaction;

@@ -1,4 +1,4 @@
-import 'package:leo_financial/shared/models/generic/failure.dart';
+import 'package:finance_with_notion/shared/models/generic/failure.dart';
 
 import 'data_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leo_financial/shared/base/base.page.dart';
+import 'package:finance_with_notion/shared/base/base.page.dart';
 
 import 'register_transaction.controller.dart';
 

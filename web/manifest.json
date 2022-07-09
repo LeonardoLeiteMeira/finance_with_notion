@@ -1,6 +1,6 @@
 {
-    "name": "leo_financial",
-    "short_name": "leo_financial",
+    "name": "finance_with_notion",
+    "short_name": "finance_with_notion",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

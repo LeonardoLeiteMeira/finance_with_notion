@@ -1,4 +1,4 @@
-import 'package:leo_financial/shared/models/enum/transaction_type.dart';
+import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
 
 class UserTransaction {
   int id;

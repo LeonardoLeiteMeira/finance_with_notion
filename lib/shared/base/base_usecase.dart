@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:leo_financial/shared/models/generic/failure.dart';
-import 'package:leo_financial/shared/models/generic/result.dart';
+import 'package:finance_with_notion/shared/models/generic/failure.dart';
+import 'package:finance_with_notion/shared/models/generic/result.dart';
 
 abstract class BaseUsecase {
   @protected

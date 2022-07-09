@@ -1,4 +1,4 @@
-package com.example.leo_financial
+package com.example.finance_with_notion
 
 import io.flutter.embedding.android.FlutterActivity
 

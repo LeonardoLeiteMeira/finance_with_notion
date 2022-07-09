@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:leo_financial/pages/initial/initial.controller.dart';
-import 'package:leo_financial/shared/base/base.page.dart';
-import 'package:leo_financial/shared/widgets/transaction_widget/transaction.widget.dart';
+import 'package:finance_with_notion/pages/initial/initial.controller.dart';
+import 'package:finance_with_notion/shared/base/base.page.dart';
+import 'package:finance_with_notion/shared/widgets/transaction_widget/transaction.widget.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leo_financial">
+    package="com.example.finance_with_notion">
    <application
-        android:label="leo_financial"
+        android:label="finance_with_notion"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

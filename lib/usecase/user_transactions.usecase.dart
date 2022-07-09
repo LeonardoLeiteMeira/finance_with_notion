@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:leo_financial/shared/base/base_usecase.dart';
-import 'package:leo_financial/shared/models/enum/transaction_type.dart';
-import 'package:leo_financial/shared/models/generic/result.dart';
-import 'package:leo_financial/shared/models/user_transaction.model.dart';
+import 'package:finance_with_notion/shared/base/base_usecase.dart';
+import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
+import 'package:finance_with_notion/shared/models/generic/result.dart';
+import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 
 @injectable
 class UserTransactionUsecase extends BaseUsecase {
