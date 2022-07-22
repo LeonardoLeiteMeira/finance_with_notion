@@ -1,4 +1,4 @@
-# leo-financial
+# Finance App With Notion
 A flutter to manager my money
 ## Getting Started
 
