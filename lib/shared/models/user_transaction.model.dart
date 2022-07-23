@@ -9,4 +9,11 @@ class UserTransaction {
 
   UserTransaction(
       this.id, this.description, this.value, this.transactionType, this.date);
+
+  UserTransaction.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        description = json["description"],
+        value = json["value"],
+        transactionType = json["transactionType"],
+        date = json["date"];
 }
