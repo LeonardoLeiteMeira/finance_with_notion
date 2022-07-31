@@ -6,10 +6,11 @@ part of 'data_state.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DataState<T> on _DataStateBase<T>, Store {
-  final _$_stateAtom = Atom(name: '_DataStateBase._state');
+  late final _$_stateAtom =
+      Atom(name: '_DataStateBase._state', context: context);
 
   @override
   StateType get _state {
@@ -24,8 +25,8 @@ mixin _$DataState<T> on _DataStateBase<T>, Store {
     });
   }
 
-  final _$_DataStateBaseActionController =
-      ActionController(name: '_DataStateBase');
+  late final _$_DataStateBaseActionController =
+      ActionController(name: '_DataStateBase', context: context);
 
   @override
   void setInitial() {

@@ -1,7 +1,7 @@
 import 'package:finance_with_notion/repository/transaction/notion_impl/notion_parser.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'notion_data_example.mock.dart';
+import 'notion_data_mock.dart';
 
 void main() {
   late NotionParser notionParseHelper;
