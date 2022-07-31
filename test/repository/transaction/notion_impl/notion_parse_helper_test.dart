@@ -1,13 +1,13 @@
-import 'package:finance_with_notion/repository/transaction/notion_impl/notion_parse_helper.dart';
+import 'package:finance_with_notion/repository/transaction/notion_impl/notion_parser.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'notion_data_example.mock.dart';
 
 void main() {
-  late NotionParseHelper notionParseHelper;
+  late NotionParser notionParseHelper;
 
   setUp(() {
-    notionParseHelper = NotionParseHelper();
+    notionParseHelper = NotionParser();
   });
 
   group("notionDatabaseToUserTransactionList", () {

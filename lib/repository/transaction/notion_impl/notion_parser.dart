@@ -9,10 +9,10 @@ import 'notionTypes/notion_rich_text.dart';
 import 'notionTypes/notion_select.dart';
 import 'enum/notion_database_columns_enum.dart';
 
-class NotionParseHelper {
+class NotionParser {
   List<UserTransaction> notionDatabaseToUserTransactionList(
       Map<String, dynamic> databaseList) {
-    var results = databaseList["results"] as List<Map<String, dynamic>>;
+    var results = databaseList["results"] as List<dynamic>;
 
     var userTransactions = <UserTransaction>[];
 
