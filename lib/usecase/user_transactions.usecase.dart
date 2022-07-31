@@ -11,15 +11,55 @@ class UserTransactionUsecase extends BaseUsecase {
         var transactionList = <UserTransaction>[];
 
         transactionList.add(UserTransaction(
-            1, "Ticket", 50.0, TransactionType.credit, DateTime.now()));
+            "1",
+            "Ticket",
+            50.0,
+            TransactionType.credit,
+            DateTime.now().toIso8601String(),
+            "Party",
+            [],
+            "",
+            "C6 Card"));
         transactionList.add(UserTransaction(
-            2, "T-Shirt", 60.0, TransactionType.credit, DateTime.now()));
+            "2",
+            "T-Shirt",
+            60.0,
+            TransactionType.credit,
+            DateTime.now().toIso8601String(),
+            "Clothes",
+            [],
+            "",
+            "C6 Card"));
         transactionList.add(UserTransaction(
-            3, "Uber", 30.0, TransactionType.credit, DateTime.now()));
+            "3",
+            "Uber",
+            30.0,
+            TransactionType.credit,
+            DateTime.now().toIso8601String(),
+            "Transportation",
+            [],
+            "",
+            "C6 Card"));
         transactionList.add(UserTransaction(
-            4, "Dinner", 40.0, TransactionType.credit, DateTime.now()));
+            "4",
+            "Dinner",
+            40.0,
+            TransactionType.credit,
+            DateTime.now().toIso8601String(),
+            "Party",
+            [],
+            "",
+            "C6 Card"));
         transactionList.add(UserTransaction(
-            5, "Salary", 9000.0, TransactionType.revenue, DateTime.now()));
+            "5",
+            "My Salary",
+            9000.0,
+            TransactionType.revenue,
+            DateTime.now().toIso8601String(),
+            "Salary",
+            [],
+            "",
+            "C6 Card"));
 
         return transactionList;
       });

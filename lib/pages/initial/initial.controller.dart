@@ -26,9 +26,9 @@ abstract class _InitialControllerBase with Store {
   }
 
   void addTransaction() {
-    var rng = Random().nextInt(200);
-    var transaction = UserTransaction(
-        rng, "iPhone", 4630, TransactionType.debt, DateTime.now());
+    var rng = Random().nextInt(200).toString();
+    var transaction = UserTransaction(rng, "iPhone", 4630, TransactionType.debt,
+        DateTime.now().toIso8601String(), "Tech", [], "", "NuConta");
 
     userTransactionsState
         .setData([...userTransactionsState.data ?? [], transaction]);

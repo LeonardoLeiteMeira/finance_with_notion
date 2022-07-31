@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
-import 'package:finance_with_notion/shared/models/generic/date_extension.dart';
 
 class TransactionWidget extends StatelessWidget {
   final UserTransaction _userTransaction;
@@ -42,10 +41,10 @@ class TransactionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _userTransaction.description,
+            _userTransaction.note,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(_userTransaction.date.toFormatDate()),
+          Text(_userTransaction.date),
         ],
       );
 
