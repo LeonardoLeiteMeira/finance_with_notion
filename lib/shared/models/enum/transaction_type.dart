@@ -30,3 +30,18 @@ extension TransactionTypeExtension on TransactionType {
     return Icon(icon, color: Colors.white);
   }
 }
+
+TransactionType stringToTransactionTypeEnum(String type) {
+  switch (type) {
+    case "Revenue":
+      return TransactionType.revenue;
+
+    case "Credit":
+      return TransactionType.credit;
+
+    case "Debit":
+      return TransactionType.debt;
+    default:
+      return TransactionType.debt;
+  }
+}
