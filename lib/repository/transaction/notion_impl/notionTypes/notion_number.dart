@@ -15,6 +15,6 @@ class NotionNumber implements NotionTypeBase {
 
   NotionNumber.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        value = json["number"],
+        value = json["number"].toDouble(),
         type = NotionPropertiesTypes.number;
 }

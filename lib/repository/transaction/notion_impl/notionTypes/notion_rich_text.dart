@@ -23,7 +23,7 @@ class NoptionRichText implements NotionTypeBase {
 
     String finaltext = "";
     for (var text in richTextList) {
-      finaltext += "${text["plain_text"]} ";
+      finaltext += "${text["plain_text"]}";
     }
 
     return finaltext;
