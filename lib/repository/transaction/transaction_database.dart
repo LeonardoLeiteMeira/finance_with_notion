@@ -4,7 +4,7 @@ import '../../shared/models/user_transaction.model.dart';
 abstract class TransactionDatabase {
   Future<void> insertTransaction(UserTransaction userTransaction);
 
-  Future<UserTransactionList> getTransactions();
+  Future<UserTransactionList> getTransactions({String page});
 
   Future<void> deleteTransaction(String id);
 }

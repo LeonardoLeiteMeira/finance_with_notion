@@ -20,7 +20,6 @@ class NotionDatabase implements TransactionDatabase {
   static const String _token = "";
   static const String _notionVersion = "2022-02-22";
   static const String _contentType = "application/json";
-
   //----------
 
   NotionDatabase(this._httpRequest) : _notionParser = NotionParser() {
@@ -45,31 +44,41 @@ class NotionDatabase implements TransactionDatabase {
   String _getTransactionsUrl(String databaseId) =>
       _templateGetTransactionsUrl.replaceAll("{id}", databaseId);
 
-  @override
-  Future<UserTransactionList> getTransactions() async {
-    //TODO ver como pegar o numero da pagina
-    //TODO ver se o hasMore faz o parse automatico de string para bool
-    var getEndPoint = _getTransactionsUrl(_databaseId);
-    var response = await _httpRequest.post(getEndPoint);
-    if (response.statusCode == 200) {
-      var notionDatabaseResult = response.data;
-      var userTransactionList = _notionParser
-          .notionDatabaseToUserTransactionList(notionDatabaseResult);
-      print(userTransactionList);
-      return UserTransactionList(userTransactionList, 1, false);
-    }
+  Map<String, dynamic> _getTransactionsBody(String page) {
+    var getTransactionsBody = {
+      "sorts": [
+        {"property": "Date", "direction": "ascending"}
+      ],
+      "page_size": 100
+    };
 
+    if (page != "") {
+      getTransactionsBody.addAll({"start_cursor": page});
+    }
+    return getTransactionsBody;
+  }
+
+  @override
+  Future<UserTransactionList> getTransactions({String page = ""}) async {
+    var getEndPoint = _getTransactionsUrl(_databaseId);
+    var body = _getTransactionsBody(page);
+    var response = await _httpRequest.post(getEndPoint, body: body);
+    if (response.statusCode == 200) {
+      return _notionResponseToUserTransactionList(response.data);
+    }
     //TODO: Handle erro
     throw ("Error");
   }
 
-  List<UserTransaction> _userTransactionListJsonToUserTransactionListEntity(
-      List<Map<String, dynamic>> userTransactionListJson) {
-    List<UserTransaction> userTransactions = [];
-    for (var userTransactionJson in userTransactionListJson) {
-      userTransactions.add(UserTransaction.fromJson(userTransactionJson));
-    }
-    return userTransactions;
+  UserTransactionList _notionResponseToUserTransactionList(
+      Map<String, dynamic> notionResponse) {
+    bool hasMoreResults = notionResponse["has_more"];
+    var page = notionResponse["next_cursor"] ?? "";
+
+    var userTransactions =
+        _notionParser.notionDatabaseToUserTransactionList(notionResponse);
+
+    return UserTransactionList(userTransactions, page, hasMoreResults);
   }
 
   ///use Create a Page with Content endpoint
@@ -77,9 +86,5 @@ class NotionDatabase implements TransactionDatabase {
   @override
   Future<void> insertTransaction(UserTransaction userTransaction) async {
     // TODO: implement insertTransaction
-  }
-
-  void userTransactionToNotionUserTransaction(UserTransaction userTransaction) {
-    //TODO
   }
 }

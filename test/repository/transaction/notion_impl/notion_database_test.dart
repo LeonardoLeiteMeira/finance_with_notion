@@ -22,17 +22,61 @@ void main() {
   test("Real call", () async {
     ///To run real call its necessary set databaseId and authorization
     ///in NotionDatabase constructor
-    var notionRealDatabase = NotionDatabase(DioImpl());
-    var a = await notionRealDatabase.getTransactions();
-    print(a);
+    // var notionRealDatabase = NotionDatabase(DioImpl());
+    // var a = await notionRealDatabase.getTransactions();
+    // print(a);
   });
   group("getTransactions", () {
-    test("Success", () async {
-      when(httpRequest.post(any)).thenAnswer(
+    test("Success to get all", () async {
+      when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
           (_) async => ResponseMock(data: databaseData, statusCode: 200));
       var result = await notionDatabase.getTransactions();
 
-      var entityToCheck = UserTransactionList(userTransactionList, 1, false);
+      var entityToCheck = UserTransactionList(userTransactionList, "", false);
+
+      expect(result.hasMore, entityToCheck.hasMore);
+      expect(result.page, entityToCheck.page);
+      expect(result.userTransactions.length,
+          entityToCheck.userTransactions.length);
+    });
+    test("Success to get first page", () async {
+      var mockNotionResponse = databaseData;
+      var resultList = mockNotionResponse["results"] as List;
+      String nextPageCursor = resultList[1]["id"];
+
+      mockNotionResponse["results"] = [resultList[0]];
+      mockNotionResponse["has_more"] = true;
+      mockNotionResponse["next_cursor"] = nextPageCursor;
+
+      when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
+          (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
+      var result = await notionDatabase.getTransactions();
+
+      var entityToCheck = UserTransactionList(
+          [userTransactionList.first], nextPageCursor, true);
+
+      expect(result.hasMore, entityToCheck.hasMore);
+      expect(result.page, entityToCheck.page);
+      expect(result.userTransactions.length,
+          entityToCheck.userTransactions.length);
+    });
+    test("Success to get next page", () async {
+      var mockNotionResponse = databaseData;
+      var resultList = mockNotionResponse["results"] as List;
+      String startPageCursor = resultList[1]["id"];
+      String nextPageCursor = resultList[2]["id"];
+
+      mockNotionResponse["results"] = [resultList[1]];
+      mockNotionResponse["has_more"] = true;
+      mockNotionResponse["next_cursor"] = nextPageCursor;
+
+      when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
+          (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
+
+      var result = await notionDatabase.getTransactions(page: startPageCursor);
+
+      var entityToCheck = UserTransactionList(
+          [userTransactionList.first], nextPageCursor, true);
 
       expect(result.hasMore, entityToCheck.hasMore);
       expect(result.page, entityToCheck.page);
@@ -43,7 +87,7 @@ void main() {
     test("Unauthorized", () async {
       //TODO
       when(httpRequest.post(any))
-          .thenAnswer((_) async => ResponseMock(data: {}, statusCode: 401));
+          .thenThrow((_) async => throw ("Unauthorized"));
     });
   });
 }
