@@ -1,5 +1,5 @@
 import 'package:finance_with_notion/repository/transaction/notion_impl/notion_database.dart';
-import 'package:finance_with_notion/shared/httpRequest/implementation/dio_impl.dart';
+import 'package:finance_with_notion/shared/config/shared_prefs.dart';
 import 'package:finance_with_notion/shared/models/user_transaction_list_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -9,23 +9,27 @@ import 'package:mockito/mockito.dart';
 import 'notion_data_mock.dart';
 import 'notion_database_test.mocks.dart';
 
-@GenerateMocks([HttpRequest])
+@GenerateMocks([HttpRequest, SharedPrefs])
 void main() {
   late NotionDatabase notionDatabase;
   late MockHttpRequest httpRequest;
+  late MockSharedPrefs mockSharedPrefs;
 
   setUp(() {
     httpRequest = MockHttpRequest();
-    notionDatabase = NotionDatabase(httpRequest);
+    mockSharedPrefs = MockSharedPrefs();
+    notionDatabase = NotionDatabase(httpRequest, mockSharedPrefs);
+    when(mockSharedPrefs.notionDatabaseId).thenReturn("");
+    when(mockSharedPrefs.notionSecretToken).thenReturn("");
   });
 
-  test("Real call", () async {
-    ///To run real call its necessary set databaseId and authorization
-    ///in NotionDatabase constructor
-    // var notionRealDatabase = NotionDatabase(DioImpl());
-    // var a = await notionRealDatabase.getTransactions();
-    // print(a);
-  });
+  // test("Real call", () async {
+  // ///To run real call its necessary set databaseId and authorization
+  // ///in NotionDatabase constructor
+  //   var notionRealDatabase = NotionDatabase(DioImpl());
+  //   var a = await notionRealDatabase.getTransactions();
+  //   print(a);
+  // });
   group("getTransactions", () {
     test("Success to get all", () async {
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(

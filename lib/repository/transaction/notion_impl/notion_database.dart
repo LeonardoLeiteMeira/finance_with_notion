@@ -1,4 +1,5 @@
 import 'package:finance_with_notion/repository/transaction/transaction_database.dart';
+import 'package:finance_with_notion/shared/config/shared_prefs.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:finance_with_notion/shared/models/user_transaction_list_model.dart';
@@ -9,23 +10,21 @@ import 'notion_parser.dart';
 @Singleton(as: TransactionDatabase)
 class NotionDatabase implements TransactionDatabase {
   final HttpRequest _httpRequest;
+  final NotionParser _notionParser;
+  final SharedPrefs _sharedPrefs;
   final String _notionApiUrl = "https://api.notion.com/v1";
   final String _templateDeleteUrl = "/blocks/{id}";
   final String _templateGetTransactionsUrl = "/databases/{id}/query";
-  final NotionParser _notionParser;
-
-  //TODO
-  //Put in shared preferes
-  static const String _databaseId = "";
-  static const String _token = "";
   static const String _notionVersion = "2022-02-22";
   static const String _contentType = "application/json";
   //----------
 
-  NotionDatabase(this._httpRequest) : _notionParser = NotionParser() {
+  NotionDatabase(this._httpRequest, this._sharedPrefs)
+      : _notionParser = NotionParser() {
+    var token = _sharedPrefs.notionSecretToken;
     _httpRequest.setBaseUrl(_notionApiUrl);
     _httpRequest.setHeader({
-      "Authorization": "Bearer $_token",
+      "Authorization": "Bearer $token",
       "Content-Type": _contentType,
       "Notion-Version": _notionVersion
     });
@@ -60,7 +59,8 @@ class NotionDatabase implements TransactionDatabase {
 
   @override
   Future<UserTransactionList> getTransactions({String page = ""}) async {
-    var getEndPoint = _getTransactionsUrl(_databaseId);
+    var databaseId = _sharedPrefs.notionDatabaseId;
+    var getEndPoint = _getTransactionsUrl(databaseId);
     var body = _getTransactionsBody(page);
     var response = await _httpRequest.post(getEndPoint, body: body);
     if (response.statusCode == 200) {

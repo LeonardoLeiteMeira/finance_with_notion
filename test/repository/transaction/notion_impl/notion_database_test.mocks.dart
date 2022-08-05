@@ -3,11 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i5;
 
+import 'package:finance_with_notion/shared/config/shared_prefs.dart' as _i2;
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart'
-    as _i2;
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:shared_preferences/shared_preferences.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,10 +22,21 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeSharedPrefs_0 extends _i1.SmartFake implements _i2.SharedPrefs {
+  _FakeSharedPrefs_0(Object parent, Invocation parentInvocation)
+      : super(parent, parentInvocation);
+}
+
+class _FakeSharedPreferences_1 extends _i1.SmartFake
+    implements _i3.SharedPreferences {
+  _FakeSharedPreferences_1(Object parent, Invocation parentInvocation)
+      : super(parent, parentInvocation);
+}
+
 /// A class which mocks [HttpRequest].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpRequest extends _i1.Mock implements _i2.HttpRequest {
+class MockHttpRequest extends _i1.Mock implements _i4.HttpRequest {
   MockHttpRequest() {
     _i1.throwOnMissingStub(this);
   }
@@ -37,23 +50,89 @@ class MockHttpRequest extends _i1.Mock implements _i2.HttpRequest {
       super.noSuchMethod(Invocation.method(#setHeader, [hearder]),
           returnValueForMissingStub: null);
   @override
-  _i3.Future<dynamic> get(String? url) =>
+  _i5.Future<dynamic> get(String? url) =>
       (super.noSuchMethod(Invocation.method(#get, [url]),
-          returnValue: _i3.Future<dynamic>.value()) as _i3.Future<dynamic>);
+          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
   @override
-  _i3.Future<dynamic> put(String? url, {Map<String, dynamic>? body}) =>
+  _i5.Future<dynamic> put(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#put, [url], {#body: body}),
-          returnValue: _i3.Future<dynamic>.value()) as _i3.Future<dynamic>);
+          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
   @override
-  _i3.Future<dynamic> post(String? url, {Map<String, dynamic>? body}) =>
+  _i5.Future<dynamic> post(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#post, [url], {#body: body}),
-          returnValue: _i3.Future<dynamic>.value()) as _i3.Future<dynamic>);
+          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
   @override
-  _i3.Future<dynamic> delete(String? url, {Map<String, dynamic>? body}) =>
+  _i5.Future<dynamic> delete(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#delete, [url], {#body: body}),
-          returnValue: _i3.Future<dynamic>.value()) as _i3.Future<dynamic>);
+          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
   @override
-  _i3.Future<dynamic> patch(String? url, {Map<String, dynamic>? body}) =>
+  _i5.Future<dynamic> patch(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#patch, [url], {#body: body}),
-          returnValue: _i3.Future<dynamic>.value()) as _i3.Future<dynamic>);
+          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+}
+
+/// A class which mocks [SharedPrefs].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPrefs extends _i1.Mock implements _i2.SharedPrefs {
+  MockSharedPrefs() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get notionDatabaseId =>
+      (super.noSuchMethod(Invocation.getter(#notionDatabaseId), returnValue: '')
+          as String);
+  @override
+  set notionDatabaseId(String? notionDatabaseId) =>
+      super.noSuchMethod(Invocation.setter(#notionDatabaseId, notionDatabaseId),
+          returnValueForMissingStub: null);
+  @override
+  String get notionSecretToken => (super
+          .noSuchMethod(Invocation.getter(#notionSecretToken), returnValue: '')
+      as String);
+  @override
+  set notionSecretToken(String? notionDatabaseId) => super.noSuchMethod(
+      Invocation.setter(#notionSecretToken, notionDatabaseId),
+      returnValueForMissingStub: null);
+  @override
+  _i5.Future<_i2.SharedPrefs> create() =>
+      (super.noSuchMethod(Invocation.method(#create, []),
+              returnValue: _i5.Future<_i2.SharedPrefs>.value(
+                  _FakeSharedPrefs_0(this, Invocation.method(#create, []))))
+          as _i5.Future<_i2.SharedPrefs>);
+  @override
+  _i5.Future<_i3.SharedPreferences> init() =>
+      (super.noSuchMethod(Invocation.method(#init, []),
+              returnValue: _i5.Future<_i3.SharedPreferences>.value(
+                  _FakeSharedPreferences_1(this, Invocation.method(#init, []))))
+          as _i5.Future<_i3.SharedPreferences>);
+  @override
+  void saveString(String? key, String? value) =>
+      super.noSuchMethod(Invocation.method(#saveString, [key, value]),
+          returnValueForMissingStub: null);
+  @override
+  void saveInt(String? key, int? value) =>
+      super.noSuchMethod(Invocation.method(#saveInt, [key, value]),
+          returnValueForMissingStub: null);
+  @override
+  void saveDouble(String? key, double? value) =>
+      super.noSuchMethod(Invocation.method(#saveDouble, [key, value]),
+          returnValueForMissingStub: null);
+  @override
+  void saveBool(String? key, bool? value) =>
+      super.noSuchMethod(Invocation.method(#saveBool, [key, value]),
+          returnValueForMissingStub: null);
+  @override
+  String? getString(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
+  @override
+  int? getInt(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
+  @override
+  double? getDouble(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
+  @override
+  bool? getBool(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
 }
