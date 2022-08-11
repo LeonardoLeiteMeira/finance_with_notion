@@ -1,5 +1,5 @@
+import 'package:finance_with_notion/pages/initial/initial.page.dart';
 import 'package:flutter/material.dart';
-import 'package:finance_with_notion/pages/initial/inital.page.dart';
 import 'package:finance_with_notion/shared/DI/di.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,5 +14,8 @@ void main() {
     preferences.notionDatabaseId = "database";
     preferences.notionSecretToken = "secret";
   });
+  //TODO config material app
+  //TODO config navigator
+
   runApp(const InitialPage());
 }

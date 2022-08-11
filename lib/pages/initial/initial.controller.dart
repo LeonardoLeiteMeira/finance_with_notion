@@ -1,36 +1,16 @@
-import 'dart:math';
-
-import 'package:injectable/injectable.dart';
-import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
-import 'package:finance_with_notion/shared/models/generic/data_state.dart';
-import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
-import 'package:finance_with_notion/usecase/user_transactions.usecase.dart';
-import 'package:finance_with_notion/shared/models/generic/result.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 part 'initial.controller.g.dart';
 
-@lazySingleton
 class InitialController = _InitialControllerBase with _$InitialController;
 
 abstract class _InitialControllerBase with Store {
-  final UserTransactionUsecase _userTransactionUsecase;
+  Future<void> initiApp() async {
+    var futureList = <Future>[];
 
-  _InitialControllerBase(this._userTransactionUsecase);
+    var future = GetIt.instance.isReady();
 
-  var userTransactionsState = DataState<List<UserTransaction>>();
-
-  void getTransactions() async {
-    _userTransactionUsecase
-        .getUserTransactions()
-        .resultCompleteSet(userTransactionsState);
-  }
-
-  void addTransaction() {
-    var rng = Random().nextInt(200).toString();
-    var transaction = UserTransaction(rng, "iPhone", 4630, TransactionType.debt,
-        DateTime.now().toIso8601String(), "Tech", [], "", "NuConta");
-
-    userTransactionsState
-        .setData([...userTransactionsState.data ?? [], transaction]);
+    futureList.add(future);
+    await Future.wait(futureList);
   }
 }

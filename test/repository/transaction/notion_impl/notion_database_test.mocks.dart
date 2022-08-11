@@ -3,13 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
-import 'package:finance_with_notion/shared/config/shared_prefs.dart' as _i2;
+import 'package:finance_with_notion/shared/config/shared_prefs.dart' as _i5;
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart'
-    as _i4;
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/shared_preferences.dart' as _i3;
+import 'package:shared_preferences/shared_preferences.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,21 +22,16 @@ import 'package:shared_preferences/shared_preferences.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeSharedPrefs_0 extends _i1.SmartFake implements _i2.SharedPrefs {
-  _FakeSharedPrefs_0(Object parent, Invocation parentInvocation)
-      : super(parent, parentInvocation);
-}
-
-class _FakeSharedPreferences_1 extends _i1.SmartFake
-    implements _i3.SharedPreferences {
-  _FakeSharedPreferences_1(Object parent, Invocation parentInvocation)
+class _FakeSharedPreferences_0 extends _i1.SmartFake
+    implements _i2.SharedPreferences {
+  _FakeSharedPreferences_0(Object parent, Invocation parentInvocation)
       : super(parent, parentInvocation);
 }
 
 /// A class which mocks [HttpRequest].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpRequest extends _i1.Mock implements _i4.HttpRequest {
+class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
   MockHttpRequest() {
     _i1.throwOnMissingStub(this);
   }
@@ -50,31 +45,31 @@ class MockHttpRequest extends _i1.Mock implements _i4.HttpRequest {
       super.noSuchMethod(Invocation.method(#setHeader, [hearder]),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<dynamic> get(String? url) =>
+  _i4.Future<dynamic> get(String? url) =>
       (super.noSuchMethod(Invocation.method(#get, [url]),
-          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+          returnValue: _i4.Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i5.Future<dynamic> put(String? url, {Map<String, dynamic>? body}) =>
+  _i4.Future<dynamic> put(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#put, [url], {#body: body}),
-          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+          returnValue: _i4.Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i5.Future<dynamic> post(String? url, {Map<String, dynamic>? body}) =>
+  _i4.Future<dynamic> post(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#post, [url], {#body: body}),
-          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+          returnValue: _i4.Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i5.Future<dynamic> delete(String? url, {Map<String, dynamic>? body}) =>
+  _i4.Future<dynamic> delete(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#delete, [url], {#body: body}),
-          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+          returnValue: _i4.Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i5.Future<dynamic> patch(String? url, {Map<String, dynamic>? body}) =>
+  _i4.Future<dynamic> patch(String? url, {Map<String, dynamic>? body}) =>
       (super.noSuchMethod(Invocation.method(#patch, [url], {#body: body}),
-          returnValue: _i5.Future<dynamic>.value()) as _i5.Future<dynamic>);
+          returnValue: _i4.Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
 /// A class which mocks [SharedPrefs].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPrefs extends _i1.Mock implements _i2.SharedPrefs {
+class MockSharedPrefs extends _i1.Mock implements _i5.SharedPrefs {
   MockSharedPrefs() {
     _i1.throwOnMissingStub(this);
   }
@@ -96,17 +91,11 @@ class MockSharedPrefs extends _i1.Mock implements _i2.SharedPrefs {
       Invocation.setter(#notionSecretToken, notionDatabaseId),
       returnValueForMissingStub: null);
   @override
-  _i5.Future<_i2.SharedPrefs> create() =>
-      (super.noSuchMethod(Invocation.method(#create, []),
-              returnValue: _i5.Future<_i2.SharedPrefs>.value(
-                  _FakeSharedPrefs_0(this, Invocation.method(#create, []))))
-          as _i5.Future<_i2.SharedPrefs>);
-  @override
-  _i5.Future<_i3.SharedPreferences> init() =>
+  _i4.Future<_i2.SharedPreferences> init() =>
       (super.noSuchMethod(Invocation.method(#init, []),
-              returnValue: _i5.Future<_i3.SharedPreferences>.value(
-                  _FakeSharedPreferences_1(this, Invocation.method(#init, []))))
-          as _i5.Future<_i3.SharedPreferences>);
+              returnValue: _i4.Future<_i2.SharedPreferences>.value(
+                  _FakeSharedPreferences_0(this, Invocation.method(#init, []))))
+          as _i4.Future<_i2.SharedPreferences>);
   @override
   void saveString(String? key, String? value) =>
       super.noSuchMethod(Invocation.method(#saveString, [key, value]),

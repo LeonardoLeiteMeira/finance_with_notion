@@ -8,7 +8,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../pages/initial/initial.controller.dart' as _i10;
+import '../../pages/listTransaction/list_transaction.controller.dart' as _i10;
 import '../../pages/registerTransaction/register_transaction.controller.dart'
     as _i5;
 import '../../repository/transaction/notion_impl/notion_database.dart' as _i8;
@@ -27,11 +27,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i3.HttpRequest>(() => _i4.DioImpl());
   gh.lazySingleton<_i5.RegisterTransactionController>(
       () => _i5.RegisterTransactionController());
-  gh.singleton<_i6.SharedPrefs>(_i6.SharedPrefs());
-  gh.singleton<_i7.TransactionDatabase>(
-      _i8.NotionDatabase(get<_i3.HttpRequest>(), get<_i6.SharedPrefs>()));
+  gh.singletonAsync<_i6.SharedPrefs>(() => _i6.SharedPrefs.create());
+  gh.lazySingletonAsync<_i7.TransactionDatabase>(() async => _i8.NotionDatabase(
+      get<_i3.HttpRequest>(), await get.getAsync<_i6.SharedPrefs>()));
   gh.factory<_i9.UserTransactionUsecase>(() => _i9.UserTransactionUsecase());
-  gh.lazySingleton<_i10.InitialController>(
-      () => _i10.InitialController(get<_i9.UserTransactionUsecase>()));
+  gh.lazySingletonAsync<_i10.ListTransactionController>(() async =>
+      _i10.ListTransactionController(get<_i9.UserTransactionUsecase>(),
+          await get.getAsync<_i7.TransactionDatabase>()));
   return get;
 }

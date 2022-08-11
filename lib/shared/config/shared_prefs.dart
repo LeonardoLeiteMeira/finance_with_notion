@@ -1,10 +1,10 @@
 import 'package:finance_with_notion/shared/config/shared_pref_handler.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@Singleton()
 class SharedPrefs extends SharedPrefHandler {
   @factoryMethod
-  Future<SharedPrefs> create() async {
+  static Future<SharedPrefs> create() async {
     var prefs = SharedPrefs();
     await prefs.init();
     return prefs;

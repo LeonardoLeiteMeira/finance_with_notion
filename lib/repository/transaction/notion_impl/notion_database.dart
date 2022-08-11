@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import 'notion_parser.dart';
 
-@Singleton(as: TransactionDatabase)
+@LazySingleton(as: TransactionDatabase)
 class NotionDatabase implements TransactionDatabase {
   final HttpRequest _httpRequest;
   final NotionParser _notionParser;
