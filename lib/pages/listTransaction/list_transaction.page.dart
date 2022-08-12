@@ -22,31 +22,29 @@ class _ListTransactionPageState extends BaseStateWithController<
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Transaction List"),
-        ),
-        body: Column(
-          children: [
-            Observer(
-                builder: (_) => controller.userTransactionsState.handleState(
-                    () => const CircularProgressIndicator(),
-                    (data) => ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: data?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return TransactionWidget(
-                              userTransaction: data?.elementAt(index),
-                            );
-                          },
-                        )))
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: controller.test,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Transaction List"),
+      ),
+      body: Column(
+        children: [
+          Observer(
+              builder: (_) => controller.userTransactionsState.handleState(
+                  () => const CircularProgressIndicator(),
+                  (data) => ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return TransactionWidget(
+                            userTransaction: data?.elementAt(index),
+                          );
+                        },
+                      )))
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: controller.test,
       ),
     );
   }

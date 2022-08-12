@@ -13,6 +13,10 @@ class _InitialPageState
     extends BaseStateWithController<InitialPage, InitialController> {
   @override
   void initState() {
+    controller.appDataState.handleReactionState(successResult: (_) {
+      //TODO Navigate do list transaction page
+      print("navigate");
+    });
     controller.initiApp();
     super.initState();
   }
