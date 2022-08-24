@@ -33,10 +33,11 @@ class _ListTransactionPageState extends BaseStateWithController<
                   () => const CircularProgressIndicator(),
                   (data) => ListView.builder(
                         shrinkWrap: true,
-                        itemCount: data?.length ?? 0,
+                        itemCount: data?.userTransactions.length ?? 0,
                         itemBuilder: (context, index) {
                           return TransactionWidget(
-                            userTransaction: data?.elementAt(index),
+                            userTransaction:
+                                data?.userTransactions.elementAt(index),
                           );
                         },
                       )))
@@ -44,7 +45,7 @@ class _ListTransactionPageState extends BaseStateWithController<
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: controller.test,
+        onPressed: controller.addTransaction,
       ),
     );
   }

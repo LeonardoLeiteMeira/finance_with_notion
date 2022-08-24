@@ -32,9 +32,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.singletonAsync<_i7.SharedPrefs>(() => _i7.SharedPrefs.create());
   gh.lazySingletonAsync<_i8.TransactionDatabase>(() async => _i9.NotionDatabase(
       get<_i3.HttpRequest>(), await get.getAsync<_i7.SharedPrefs>()));
-  gh.factory<_i10.UserTransactionUsecase>(() => _i10.UserTransactionUsecase());
-  gh.lazySingletonAsync<_i11.ListTransactionController>(() async =>
-      _i11.ListTransactionController(get<_i10.UserTransactionUsecase>(),
+  gh.factoryAsync<_i10.UserTransactionUsecase>(() async =>
+      _i10.UserTransactionUsecase(
           await get.getAsync<_i8.TransactionDatabase>()));
+  gh.lazySingletonAsync<_i11.ListTransactionController>(() async =>
+      _i11.ListTransactionController(
+          await get.getAsync<_i10.UserTransactionUsecase>()));
   return get;
 }
