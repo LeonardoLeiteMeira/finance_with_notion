@@ -1,3 +1,4 @@
+import 'package:finance_with_notion/shared/models/generic/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
@@ -31,12 +32,9 @@ class _ListTransactionPageState extends BaseStateWithController<
         children: [
           Observer(
             builder: (_) => controller.userTransactionsState.handleState(
-              loading,
-              transactionWidgetList,
-              (e) => Center(
-                child: Text("Error $e"),
-              ),
-            ),
+                initial: loading,
+                success: transactionWidgetList,
+                error: errorWidget),
           )
         ],
       ),
@@ -55,5 +53,9 @@ class _ListTransactionPageState extends BaseStateWithController<
             userTransaction: data?.userTransactions.elementAt(index),
           );
         },
+      );
+
+  Widget errorWidget(Failure? e) => Center(
+        child: Text("Error $e"),
       );
 }

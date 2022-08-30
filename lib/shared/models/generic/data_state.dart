@@ -52,7 +52,8 @@ abstract class _DataStateBase<T> with Store {
     _error = error;
   }
 
-  Widget handleState(Initial initial, Success<T> success, [Error? error]) {
+  Widget handleState(
+      {required Initial initial, required Success<T> success, Error? error}) {
     switch (_state) {
       case StateType.initial:
         return initial();
