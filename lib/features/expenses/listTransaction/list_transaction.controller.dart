@@ -7,10 +7,10 @@ import 'package:finance_with_notion/usecase/user_transactions.usecase.dart';
 import 'package:finance_with_notion/shared/models/generic/result.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../shared/models/user_transaction_list_model.dart';
+import '../../../shared/models/user_transaction_list_model.dart';
 part 'list_transaction.controller.g.dart';
 
-@lazySingleton
+@LazySingleton()
 class ListTransactionController = _ListTransactionControllerBase
     with _$ListTransactionController;
 

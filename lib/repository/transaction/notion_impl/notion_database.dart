@@ -3,6 +3,7 @@ import 'package:finance_with_notion/shared/config/shared_prefs.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:finance_with_notion/shared/models/user_transaction_list_model.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'notion_parser.dart';
@@ -11,7 +12,7 @@ import 'notion_parser.dart';
 class NotionDatabase implements TransactionDatabase {
   final HttpRequest _httpRequest;
   final NotionParser _notionParser;
-  final SharedPrefs _sharedPrefs;
+  late final SharedPrefs _sharedPrefs;
   final String _notionApiUrl = "https://api.notion.com/v1";
   final String _templateDeleteUrl = "/blocks/{id}";
   final String _templateGetTransactionsUrl = "/databases/{id}/query";
@@ -19,8 +20,9 @@ class NotionDatabase implements TransactionDatabase {
   static const String _contentType = "application/json";
   //----------
 
-  NotionDatabase(this._httpRequest, this._sharedPrefs)
+  NotionDatabase(this._httpRequest, {SharedPrefs? sharedPrefsToUnitTest})
       : _notionParser = NotionParser() {
+    _sharedPrefs = sharedPrefsToUnitTest ?? GetIt.I.get<SharedPrefs>();
     var token = _sharedPrefs.notionSecretToken;
     _httpRequest.setBaseUrl(_notionApiUrl);
     _httpRequest.setHeader({

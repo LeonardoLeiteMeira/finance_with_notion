@@ -18,18 +18,12 @@ void main() {
   setUp(() {
     httpRequest = MockHttpRequest();
     mockSharedPrefs = MockSharedPrefs();
-    notionDatabase = NotionDatabase(httpRequest, mockSharedPrefs);
     when(mockSharedPrefs.notionDatabaseId).thenReturn("");
     when(mockSharedPrefs.notionSecretToken).thenReturn("");
+    notionDatabase =
+        NotionDatabase(httpRequest, sharedPrefsToUnitTest: mockSharedPrefs);
   });
 
-  // test("Real call", () async {
-  // ///To run real call its necessary set databaseId and authorization
-  // ///in NotionDatabase constructor
-  //   var notionRealDatabase = NotionDatabase(DioImpl());
-  //   var a = await notionRealDatabase.getTransactions();
-  //   print(a);
-  // });
   group("getTransactions", () {
     test("Success to get all", () async {
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
@@ -44,13 +38,14 @@ void main() {
           entityToCheck.userTransactions.length);
     });
     test("Success to get first page", () async {
-      var mockNotionResponse = databaseData;
-      var resultList = mockNotionResponse["results"] as List;
+      var resultList = databaseData["results"] as List;
       String nextPageCursor = resultList[1]["id"];
 
-      mockNotionResponse["results"] = [resultList[0]];
-      mockNotionResponse["has_more"] = true;
-      mockNotionResponse["next_cursor"] = nextPageCursor;
+      var mockNotionResponse = {
+        "results": [resultList[0]],
+        "has_more": true,
+        "next_cursor": nextPageCursor
+      };
 
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
           (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
@@ -65,14 +60,15 @@ void main() {
           entityToCheck.userTransactions.length);
     });
     test("Success to get next page", () async {
-      var mockNotionResponse = databaseData;
-      var resultList = mockNotionResponse["results"] as List;
+      var resultList = databaseData["results"] as List;
       String startPageCursor = resultList[1]["id"];
       String nextPageCursor = resultList[2]["id"];
 
-      mockNotionResponse["results"] = [resultList[1]];
-      mockNotionResponse["has_more"] = true;
-      mockNotionResponse["next_cursor"] = nextPageCursor;
+      var mockNotionResponse = {
+        "results": [resultList[1]],
+        "has_more": true,
+        "next_cursor": nextPageCursor
+      };
 
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
           (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
@@ -88,11 +84,11 @@ void main() {
           entityToCheck.userTransactions.length);
     });
 
-    test("Unauthorized", () async {
-      //TODO
-      when(httpRequest.post(any))
-          .thenThrow((_) async => throw ("Unauthorized"));
-    });
+    // test("Unauthorized", () async {
+    //   //TODO
+    //   when(httpRequest.post(any))
+    //       .thenThrow((_) async => throw ("Unauthorized"));
+    // });
   });
 }
 

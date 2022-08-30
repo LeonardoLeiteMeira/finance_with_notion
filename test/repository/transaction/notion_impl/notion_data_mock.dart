@@ -17,7 +17,7 @@ var userTransactionList = [
       "Aee",
       5000,
       TransactionType.credit,
-      "2022-07-01",
+      "2022-07-02",
       "Salary",
       ["Salary"],
       "",

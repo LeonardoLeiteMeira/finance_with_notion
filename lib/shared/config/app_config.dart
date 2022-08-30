@@ -5,12 +5,11 @@ import 'package:get_it/get_it.dart';
 
 class AppConfig {
   static Future<void> configApp() async {
-    WidgetsFlutterBinding.ensureInitialized();
     configureDependencies();
+    WidgetsFlutterBinding.ensureInitialized();
 
     GetIt getIt = GetIt.instance;
     await getIt.allReady();
-
     var preferences = getIt.get<SharedPrefs>();
     preferences.notionDatabaseId = "database";
     preferences.notionSecretToken = "secret";
