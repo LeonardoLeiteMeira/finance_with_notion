@@ -7,6 +7,10 @@ abstract class BaseStateWithController<W extends StatefulWidget,
   @protected
   C controller = GetIt.I.get<C>();
 
+  Widget loading() => const Center(
+        child: CircularProgressIndicator(),
+      );
+
   @override
   void dispose() {
     super.dispose();
