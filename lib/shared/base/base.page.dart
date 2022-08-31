@@ -7,14 +7,10 @@ abstract class BaseStateWithController<W extends StatefulWidget,
   @protected
   C controller = GetIt.I.get<C>();
 
-  Widget loading() => const Center(
-        child: CircularProgressIndicator(),
-      );
-
   @override
   void dispose() {
     super.dispose();
-    GetIt.I.resetLazySingleton(instance: controller);
+    GetIt.I.resetLazySingleton<C>(instance: controller);
     print("Dispose $C");
   }
 }
@@ -23,9 +19,9 @@ abstract class BaseState<W extends StatefulWidget> extends State<W> {
   List<ReactionDisposer>? reactionDisposers;
 
   @protected
-  Widget showLoading() {
-    return const CircularProgressIndicator();
-  }
+  Widget showLoading() => const Center(
+        child: CircularProgressIndicator(),
+      );
 
   @override
   void dispose() {

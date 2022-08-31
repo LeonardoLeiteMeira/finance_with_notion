@@ -29,10 +29,11 @@ class _ListTransactionPageState extends BaseStateWithController<
         title: const Text("Transaction List"),
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Observer(
             builder: (_) => controller.userTransactionsState.handleState(
-                initial: loading,
+                initial: showLoading,
                 success: transactionWidgetList,
                 error: errorWidget),
           )
