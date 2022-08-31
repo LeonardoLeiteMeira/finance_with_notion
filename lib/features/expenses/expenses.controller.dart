@@ -1,4 +1,3 @@
-import 'package:finance_with_notion/shared/models/generic/data_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 part 'expenses.controller.g.dart';
@@ -7,9 +6,11 @@ part 'expenses.controller.g.dart';
 class ExpensesController = _ExpensesControllerBase with _$ExpensesController;
 
 abstract class _ExpensesControllerBase with Store {
-  DataState appDataState = DataState<bool>();
+  @observable
+  bool createNewTransaction = false;
 
-  Future<void> initiApp() async {
-    appDataState.setData(true);
+  @action
+  void setCreateNewTransaction(bool value) {
+    createNewTransaction = value;
   }
 }

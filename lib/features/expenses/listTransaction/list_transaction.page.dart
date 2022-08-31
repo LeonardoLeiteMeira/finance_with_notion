@@ -25,9 +25,7 @@ class _ListTransactionPageState extends BaseStateWithController<
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Transaction List"),
-      ),
+      appBar: AppBar(title: const Text("Transaction List")),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

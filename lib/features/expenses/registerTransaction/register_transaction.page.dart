@@ -14,6 +14,11 @@ class RegisterTransactionPage extends StatefulWidget {
 class _RegisterTransactionPageState extends BaseStateWithController<
     RegisterTransactionPage, RegisterTransactionController> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Register New Transaction")),
