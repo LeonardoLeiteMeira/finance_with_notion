@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'dio_interceptors.dart';
 
@@ -13,6 +14,14 @@ class DioImpl implements HttpRequest {
       : _dio = Dio(),
         _dioInterceptors = DioInterceptors() {
     _configureInterceptors();
+    _dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90));
   }
 
   void _configureInterceptors() {
