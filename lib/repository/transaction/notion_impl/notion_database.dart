@@ -1,6 +1,7 @@
 import 'package:finance_with_notion/repository/transaction/transaction_database.dart';
 import 'package:finance_with_notion/shared/config/shared_prefs.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
+import 'package:finance_with_notion/shared/models/generic/failure.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:finance_with_notion/shared/models/user_transaction_list_model.dart';
 import 'package:get_it/get_it.dart';
@@ -68,8 +69,8 @@ class NotionDatabase implements TransactionDatabase {
     if (response.statusCode == 200) {
       return _notionResponseToUserTransactionList(response.data);
     }
-    //TODO: Handle erro
-    throw ("Error");
+    throw (NotionError(
+        "${response.statusCode} - ${response.statusMessage} - ${response.data}"));
   }
 
   UserTransactionList _notionResponseToUserTransactionList(

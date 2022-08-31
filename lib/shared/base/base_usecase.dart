@@ -8,7 +8,7 @@ abstract class BaseUsecase {
     try {
       return Result.success(await call());
     } catch (e) {
-      return Result.error(UnmappedFailure(e));
+      return Result.error(Failure(e));
     }
   }
 
@@ -17,7 +17,7 @@ abstract class BaseUsecase {
     try {
       return Result.success(call());
     } catch (e) {
-      return Result.error(UnmappedFailure(e));
+      return Result.error(Failure(e));
     }
   }
 }

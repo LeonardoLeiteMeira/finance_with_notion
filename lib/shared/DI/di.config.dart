@@ -31,8 +31,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i6.RegisterTransactionController>(
       () => _i6.RegisterTransactionController());
   gh.singletonAsync<_i7.SharedPrefs>(() => _i7.SharedPrefs.create());
-  gh.lazySingleton<_i8.TransactionDatabase>(
-      () => _i9.NotionDatabase(get<_i4.HttpRequest>()));
+  gh.lazySingleton<_i8.TransactionDatabase>(() => _i9.NotionDatabase(
+      get<_i4.HttpRequest>(),
+      sharedPrefsToUnitTest: get<_i7.SharedPrefs>()));
   gh.factory<_i10.UserTransactionUsecase>(
       () => _i10.UserTransactionUsecase(get<_i8.TransactionDatabase>()));
   gh.lazySingleton<_i11.ListTransactionController>(
