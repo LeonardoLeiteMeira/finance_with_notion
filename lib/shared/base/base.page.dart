@@ -1,3 +1,4 @@
+import 'package:finance_with_notion/shared/models/generic/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
@@ -22,6 +23,14 @@ abstract class BaseState<W extends StatefulWidget> extends State<W> {
   Widget showLoading() => const Center(
         child: CircularProgressIndicator(),
       );
+
+  @protected
+  Widget errorWidget(Failure? e) {
+    print("Error:\n $e");
+    return const Center(
+      child: Text("Error to load information"),
+    );
+  }
 
   @override
   void dispose() {

@@ -10,10 +10,15 @@ class TransactionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var sideMargin = MediaQuery.of(context).size.width * 0.07;
     return Container(
-      padding: const EdgeInsets.all(12),
+      height: 65,
+      margin: EdgeInsets.only(bottom: 18, left: sideMargin, right: sideMargin),
+      decoration: BoxDecoration(
+          color: Colors.blue[200], borderRadius: BorderRadius.circular(10)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
@@ -31,6 +36,7 @@ class TransactionWidget extends StatelessWidget {
   Widget getIcon() => Container(
         width: 40,
         height: 40,
+        margin: const EdgeInsets.only(left: 13),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             color: Colors.green),
@@ -39,6 +45,7 @@ class TransactionWidget extends StatelessWidget {
 
   Widget getDescriptionAndDate() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             _userTransaction.note,
@@ -48,8 +55,10 @@ class TransactionWidget extends StatelessWidget {
         ],
       );
 
-  Widget getValue() => SizedBox(
-        width: 70,
-        child: Text(_userTransaction.value.toString()),
+  Widget getValue() => Container(
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 13),
+        width: 100,
+        child: Text("\$${_userTransaction.value.toString()}"),
       );
 }
