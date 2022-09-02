@@ -133,7 +133,18 @@ class _ListTransactionPageState extends BaseStateWithController<
               )
             ],
           ),
-          const Text("Details")
+          Container(
+            margin: EdgeInsets.only(right: margin, left: margin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text("Total expend"),
+                Text("10%"),
+                Text("80%"),
+                Text("Total incomes"),
+              ],
+            ),
+          )
         ],
       ),
     );
