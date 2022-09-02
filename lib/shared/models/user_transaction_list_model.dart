@@ -6,4 +6,9 @@ class UserTransactionList {
   bool hasMore;
 
   UserTransactionList(this.userTransactions, this.page, this.hasMore);
+
+  double get totalValueExpende => userTransactions.fold<double>(
+      0.0,
+      (previousTransaction, transaction) =>
+          previousTransaction + transaction.value);
 }
