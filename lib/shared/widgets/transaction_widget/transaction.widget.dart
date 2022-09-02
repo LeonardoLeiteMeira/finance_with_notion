@@ -52,7 +52,7 @@ class TransactionWidget extends StatelessWidget {
   Widget textInValueAndNote(String note) => Text(
         note,
         style: TextStyle(
-            fontWeight: FontWeight.w600, fontSize: 14, color: textColor),
+            fontWeight: FontWeight.w600, fontSize: 16, color: textColor),
       );
 
   Widget iconCategoryAndDate() => SizedBox(
@@ -92,6 +92,6 @@ class TransactionWidget extends StatelessWidget {
   Widget textInCategoryAndDate(String text) => Text(
         text,
         style: TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 16, color: textColor),
+            fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
       );
 }
