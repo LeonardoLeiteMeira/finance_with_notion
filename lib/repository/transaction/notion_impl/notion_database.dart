@@ -49,7 +49,7 @@ class NotionDatabase implements TransactionDatabase {
   Map<String, dynamic> _getTransactionsBody(String page) {
     var getTransactionsBody = {
       "sorts": [
-        {"property": "Date", "direction": "ascending"}
+        {"property": "Date", "direction": "descending"}
       ],
       "page_size": 100
     };
