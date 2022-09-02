@@ -5,7 +5,7 @@ class UserTransaction {
   String note;
   double value;
   TransactionType transactionType;
-  String date;
+  DateTime date;
   String category;
   List<String> seconderyCategory;
   String location;

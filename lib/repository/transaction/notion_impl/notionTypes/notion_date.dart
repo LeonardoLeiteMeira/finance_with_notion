@@ -9,11 +9,11 @@ class NotionDate implements NotionTypeBase {
   NotionPropertiesTypes type;
 
   @override
-  String value;
+  DateTime value;
 
   NotionDate(this.id, this.type, this.value);
   NotionDate.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         type = NotionPropertiesTypes.date,
-        value = json["date"]["start"];
+        value = DateTime.parse(json["date"]["start"]);
 }

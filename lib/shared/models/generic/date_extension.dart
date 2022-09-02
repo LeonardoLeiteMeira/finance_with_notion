@@ -1,14 +1,21 @@
+///Import to use DateTimeExtension
+///import 'package:finance_with_notion/shared/models/generic/date_extension.dart';
 extension DateTimeExtension on DateTime {
-  String toFormatDate() {
-    var monthAsNumber = month;
+  String fullFormatDate() {
     var year = this.year;
     var day = this.day;
-    String monthAsString = _getMonthString(monthAsNumber);
+    String monthAsString = _getMonthString();
     return "$day $monthAsString $year";
   }
 
-  String _getMonthString(int monthAsNumber) {
-    switch (monthAsNumber) {
+  String dayAndMonthFormat() {
+    var day = this.day;
+    var month = _getMonthString();
+    return "$day $month";
+  }
+
+  String _getMonthString() {
+    switch (month) {
       case 1:
         return "Jan";
       case 2:
