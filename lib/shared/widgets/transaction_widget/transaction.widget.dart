@@ -3,62 +3,94 @@ import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 
 class TransactionWidget extends StatelessWidget {
+  final double internalMargin = 13.0;
+  final double cardHeight = 65;
+  final double spaceBetweenCards = 18;
+  final Color textColor = const Color(0xff313EB5);
+  final Color cardColor = const Color(0xffFAF8F6);
   final UserTransaction _userTransaction;
-  const TransactionWidget({Key? key, required userTransaction})
+  final double sideMargin;
+
+  const TransactionWidget(
+      {Key? key, required userTransaction, required this.sideMargin})
       : _userTransaction = userTransaction,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var sideMargin = MediaQuery.of(context).size.width * 0.07;
     return Container(
-      height: 65,
-      margin: EdgeInsets.only(bottom: 18, left: sideMargin, right: sideMargin),
+      height: cardHeight,
+      margin: EdgeInsets.only(
+        bottom: spaceBetweenCards,
+        left: sideMargin,
+        right: sideMargin,
+      ),
       decoration: BoxDecoration(
-          color: Colors.blue[200], borderRadius: BorderRadius.circular(10)),
+          color: cardColor,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black)),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              getIcon(),
-              const SizedBox(width: 15),
-              getDescriptionAndDate()
-            ],
-          ),
-          getValue()
-        ],
+        children: [iconCategoryAndDate(), valueAndNote()],
       ),
     );
   }
 
-  Widget getIcon() => Container(
+  Widget valueAndNote() => Container(
+        margin: EdgeInsets.only(right: internalMargin),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            textInValueAndNote("\$${_userTransaction.value.toString()}"),
+            textInValueAndNote(_userTransaction.note)
+          ],
+        ),
+      );
+
+  Widget textInValueAndNote(String note) => Text(
+        note,
+        style: TextStyle(
+            fontWeight: FontWeight.w600, fontSize: 14, color: textColor),
+      );
+
+  Widget iconCategoryAndDate() => SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            expenseIcon(),
+            const SizedBox(width: 8),
+            categoryAndDate()
+          ],
+        ),
+      );
+
+  Widget expenseIcon() => Container(
         width: 40,
         height: 40,
-        margin: const EdgeInsets.only(left: 13),
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            color: Colors.green),
+        margin: EdgeInsets.only(left: internalMargin),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(8),
+          ),
+          color: _userTransaction.transactionType.getColor(),
+        ),
         child: _userTransaction.transactionType.getIcon(),
       );
 
-  Widget getDescriptionAndDate() => Column(
+  Widget categoryAndDate() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            _userTransaction.note,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text(_userTransaction.date),
+          textInCategoryAndDate(_userTransaction.category),
+          textInCategoryAndDate(_userTransaction.date),
         ],
       );
 
-  Widget getValue() => Container(
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 13),
-        width: 100,
-        child: Text("\$${_userTransaction.value.toString()}"),
+  Widget textInCategoryAndDate(String text) => Text(
+        text,
+        style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 16, color: textColor),
       );
 }

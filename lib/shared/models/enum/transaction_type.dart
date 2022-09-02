@@ -29,6 +29,19 @@ extension TransactionTypeExtension on TransactionType {
     }
     return Icon(icon, color: Colors.white);
   }
+
+  Color getColor() {
+    switch (this) {
+      case TransactionType.credit:
+        return const Color(0xff313EB5);
+      case TransactionType.debt:
+        return const Color(0xff2F88D6);
+      case TransactionType.revenue:
+        return const Color(0xff2FD48D);
+      default:
+        return const Color(0xffFCFF79);
+    }
+  }
 }
 
 TransactionType stringToTransactionTypeEnum(String type) {

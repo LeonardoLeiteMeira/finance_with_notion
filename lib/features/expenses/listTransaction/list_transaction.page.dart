@@ -15,6 +15,8 @@ class ListTransactionPage extends StatefulWidget {
 
 class _ListTransactionPageState extends BaseStateWithController<
     ListTransactionPage, ListTransactionController> {
+  final double imageProfileDiameter = 70;
+
   @override
   void initState() {
     controller.getTransactions();
@@ -23,13 +25,13 @@ class _ListTransactionPageState extends BaseStateWithController<
 
   @override
   Widget build(BuildContext context) {
-    var margin = MediaQuery.of(context).size.width * 0.07;
+    var sideMargin = MediaQuery.of(context).size.width * 0.04;
     return Scaffold(
       appBar: myAppBar(context),
       body: Observer(
         builder: (_) => controller.userTransactionsState.handleState(
             initial: showLoading,
-            success: (data) => page(data, margin, context),
+            success: (data) => page(data, sideMargin, context),
             error: errorWidget),
       ),
       floatingActionButton: FloatingActionButton(
@@ -40,6 +42,7 @@ class _ListTransactionPageState extends BaseStateWithController<
   }
 
   AppBar myAppBar(context) => AppBar(
+        elevation: 0,
         backgroundColor: const Color(0xff313EB5),
         toolbarHeight: MediaQuery.of(context).size.height * 0.12,
         title: Row(
@@ -56,44 +59,48 @@ class _ListTransactionPageState extends BaseStateWithController<
       );
 
   Widget imageProfile() => Container(
-        width: 70,
-        height: 70,
+        width: imageProfileDiameter,
+        height: imageProfileDiameter,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           image: const DecorationImage(
             image: NetworkImage("https://picsum.photos/200/200?random=1"),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(imageProfileDiameter),
         ),
       );
 
-  Widget page(UserTransactionList? data, double margin, context) => Column(
+  Widget page(UserTransactionList? data, double sideMargin, context) => Column(
         children: [
-          expendesBarProgress(margin, context),
-          buttonSeeDetails(margin, context),
+          expendesBarProgress(sideMargin, context),
+          buttonSeeDetails(sideMargin, context),
           Divider(
             height: 20,
             color: Colors.black,
-            endIndent: margin,
-            indent: margin,
+            endIndent: sideMargin,
+            indent: sideMargin,
           ),
-          listOfExpenses(data, context)
+          listOfExpenses(data, sideMargin, context)
         ],
       );
 
-  Widget listOfExpenses(UserTransactionList? data, context) => ListView.builder(
-        shrinkWrap: true,
-        itemCount: data?.userTransactions.length ?? 0,
-        itemBuilder: (context, index) {
-          return TransactionWidget(
-            userTransaction: data?.userTransactions.elementAt(index),
-          );
-        },
+  Widget listOfExpenses(
+          UserTransactionList? data, double sideMargin, context) =>
+      Expanded(
+        child: ListView.builder(
+          itemCount: data?.userTransactions.length ?? 0,
+          itemBuilder: (context, index) {
+            return TransactionWidget(
+              userTransaction: data?.userTransactions.elementAt(index),
+              sideMargin: sideMargin,
+            );
+          },
+        ),
       );
 
   Widget expendesBarProgress(double margin, context) {
-    double barWidth = MediaQuery.of(context).size.width * 0.5;
+    double barWidth = MediaQuery.of(context).size.width * 0.55;
     double barThickness = 30;
     double height = 70;
     return Container(
@@ -107,7 +114,10 @@ class _ListTransactionPageState extends BaseStateWithController<
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              valueText("\$10", margin),
+              Container(
+                margin: EdgeInsets.only(left: margin),
+                child: valueText("\$10"),
+              ),
               Stack(
                 alignment: AlignmentDirectional.centerStart,
                 children: [
@@ -117,7 +127,10 @@ class _ListTransactionPageState extends BaseStateWithController<
                   simpleBarProgress(barThickness, barWidth * 0.3, Colors.red),
                 ],
               ),
-              valueText("\$1000", margin),
+              Container(
+                margin: EdgeInsets.only(right: margin),
+                child: valueText("\$100000"),
+              )
             ],
           ),
           const Text("Details")
@@ -125,6 +138,11 @@ class _ListTransactionPageState extends BaseStateWithController<
       ),
     );
   }
+
+  Widget valueText(String value) => Text(
+        value,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      );
 
   Widget simpleBarProgress(double thickness, double width, Color color) =>
       Container(
@@ -134,23 +152,14 @@ class _ListTransactionPageState extends BaseStateWithController<
             color: color, borderRadius: BorderRadius.circular(20)),
       );
 
-  Widget valueText(String value, double margin) => Container(
-        margin: EdgeInsets.only(left: margin, right: margin),
-        alignment: Alignment.centerLeft,
-        child: Text(
-          value,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-      );
-
   Widget buttonSeeDetails(double margin, context) => Container(
-        width: MediaQuery.of(context).size.width * 0.86,
+        width: MediaQuery.of(context).size.width - (2 * margin),
         height: 55,
         margin: EdgeInsets.only(left: margin, right: margin),
         child: ElevatedButton(
           child: const Text(
             "See details of expends",
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 18),
           ),
           style: ElevatedButton.styleFrom(),
           onPressed: () {},
