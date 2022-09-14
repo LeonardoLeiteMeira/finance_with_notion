@@ -49,7 +49,10 @@ class _ListTransactionPageState extends BaseStateWithController<
           children: [
             imageProfile(),
             const SizedBox(width: 20),
-            const Text("Hi, Leonardo Leite")
+            const Flexible(child: Text(
+              "Hi, Leonardo Leite",
+              overflow: TextOverflow.fade,
+            ))
           ],
         ),
         actions: [
@@ -63,12 +66,10 @@ class _ListTransactionPageState extends BaseStateWithController<
         height: imageProfileDiameter,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: NetworkImage("https://picsum.photos/200/200?random=1"),
-            fit: BoxFit.cover,
-          ),
           borderRadius: BorderRadius.circular(imageProfileDiameter),
+          color: Colors.black
         ),
+        child: const Icon(Icons.person, size: 35,),
       );
 
   Widget page(UserTransactionList? data, double sideMargin, context) => Column(
