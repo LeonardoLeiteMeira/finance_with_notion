@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
 import 'package:finance_with_notion/shared/widgets/transaction_widget/transaction.widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../shared/models/user_transaction_list_model.dart';
 import 'list_transaction.controller.dart';
@@ -49,7 +49,8 @@ class _ListTransactionPageState extends BaseStateWithController<
           children: [
             imageProfile(),
             const SizedBox(width: 20),
-            const Flexible(child: Text(
+            const Flexible(
+                child: Text(
               "Hi, Leonardo Leite",
               overflow: TextOverflow.fade,
             ))
@@ -66,10 +67,12 @@ class _ListTransactionPageState extends BaseStateWithController<
         height: imageProfileDiameter,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(imageProfileDiameter),
-          color: Colors.black
+            borderRadius: BorderRadius.circular(imageProfileDiameter),
+            color: Colors.black),
+        child: const Icon(
+          Icons.person,
+          size: 35,
         ),
-        child: const Icon(Icons.person, size: 35,),
       );
 
   Widget page(UserTransactionList? data, double sideMargin, context) => Column(

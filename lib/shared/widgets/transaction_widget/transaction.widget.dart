@@ -43,7 +43,7 @@ class TransactionWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            textInValueAndNote("\$${_userTransaction.value.toString()}"),
+            textInValueAndNote(_userTransaction.valueAsCurrency),
             textInValueAndNote(_userTransaction.note)
           ],
         ),

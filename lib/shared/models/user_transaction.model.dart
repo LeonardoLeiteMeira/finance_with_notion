@@ -1,4 +1,5 @@
 import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
+import 'package:intl/intl.dart';
 
 class UserTransaction {
   String id;
@@ -10,6 +11,12 @@ class UserTransaction {
   List<String> seconderyCategory;
   String location;
   String origin;
+
+  String get valueAsCurrency{
+    //TODO insert dynamic locale currency 
+    var format = NumberFormat.simpleCurrency(locale: "de_DE");
+    return format.format(value);
+  }
 
   UserTransaction(
       this.id,
