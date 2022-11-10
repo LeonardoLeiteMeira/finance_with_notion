@@ -19,7 +19,6 @@ class NotionDatabase implements TransactionDatabase {
   final String _templateGetTransactionsUrl = "/databases/{id}/query";
   static const String _notionVersion = "2022-02-22";
   static const String _contentType = "application/json";
-  //----------
 
   NotionDatabase(this._httpRequest, {SharedPrefs? sharedPrefsToUnitTest})
       : _notionParser = NotionParser() {

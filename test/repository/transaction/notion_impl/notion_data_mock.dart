@@ -6,7 +6,7 @@ var userTransactionList = [
       "ddd22d8b-97dc-4bc2-a407-0ed6097d4792",
       "Bitcoin",
       2000,
-      TransactionType.debt,
+      TransactionType.debit,
       DateTime.parse("2022-07-04"),
       "Investiment",
       ["Investiment"],

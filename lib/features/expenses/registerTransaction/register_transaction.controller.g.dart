@@ -26,10 +26,46 @@ mixin _$RegisterTransactionController
     });
   }
 
+  late final _$transactionTypeAtom = Atom(
+      name: '_RegisterTransactionControllerBase.transactionType',
+      context: context);
+
+  @override
+  TransactionType get transactionType {
+    _$transactionTypeAtom.reportRead();
+    return super.transactionType;
+  }
+
+  @override
+  set transactionType(TransactionType value) {
+    _$transactionTypeAtom.reportWrite(value, super.transactionType, () {
+      super.transactionType = value;
+    });
+  }
+
+  late final _$_RegisterTransactionControllerBaseActionController =
+      ActionController(
+          name: '_RegisterTransactionControllerBase', context: context);
+
+  @override
+  void setTransactionTypeFromString(String value) {
+    final _$actionInfo =
+        _$_RegisterTransactionControllerBaseActionController.startAction(
+            name:
+                '_RegisterTransactionControllerBase.setTransactionTypeFromString');
+    try {
+      return super.setTransactionTypeFromString(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-description: ${description}
+description: ${description},
+transactionType: ${transactionType}
     ''';
   }
 }

@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
-enum TransactionType { credit, debt, revenue }
+enum TransactionType { credit, debit, revenue }
 
 extension TransactionTypeExtension on TransactionType {
+  String asString() {
+    switch (this) {
+      case TransactionType.credit:
+        return "Credit";
+      case TransactionType.debit:
+        return "Debit";
+      case TransactionType.revenue:
+        return "Revenue";
+    }
+  }
+
   String description() {
     switch (this) {
       case TransactionType.credit:
         return "Credit card expenses";
-      case TransactionType.debt:
-        return "Debt expenses";
+      case TransactionType.debit:
+        return "Debit expenses";
       case TransactionType.revenue:
         return "Any revenue that comes in";
     }
@@ -20,7 +31,7 @@ extension TransactionTypeExtension on TransactionType {
       case TransactionType.credit:
         icon = Icons.credit_card;
         break;
-      case TransactionType.debt:
+      case TransactionType.debit:
         icon = Icons.attach_money_rounded;
         break;
       case TransactionType.revenue:
@@ -34,7 +45,7 @@ extension TransactionTypeExtension on TransactionType {
     switch (this) {
       case TransactionType.credit:
         return const Color(0xff313EB5);
-      case TransactionType.debt:
+      case TransactionType.debit:
         return const Color(0xff2F88D6);
       case TransactionType.revenue:
         return const Color(0xff2FD48D);
@@ -53,8 +64,8 @@ TransactionType stringToTransactionTypeEnum(String type) {
       return TransactionType.credit;
 
     case "Debit":
-      return TransactionType.debt;
+      return TransactionType.debit;
     default:
-      return TransactionType.debt;
+      return TransactionType.debit;
   }
 }
