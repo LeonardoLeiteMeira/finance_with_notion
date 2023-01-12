@@ -1,3 +1,4 @@
+import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -38,9 +39,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
               onChange: controller.setTransactionTypeFromString,
             ),
           ),
-          TextFormField(
-            initialValue: "Description",
-          ),
+          const CashValue(),
           TextFormField(
             initialValue: "Dropdown To select transaction type",
           ),
