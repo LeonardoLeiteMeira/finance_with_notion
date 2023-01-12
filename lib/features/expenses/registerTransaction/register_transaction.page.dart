@@ -2,7 +2,6 @@ import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import '../../../shared/models/enum/transaction_type.dart';
 import '../../../shared/widgets/forms_widget/radio_button/radio_button.dart';
 import 'register_transaction.controller.dart';
