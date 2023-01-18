@@ -10,22 +10,6 @@ part of 'register_transaction.controller.dart';
 
 mixin _$RegisterTransactionController
     on _RegisterTransactionControllerBase, Store {
-  late final _$descriptionAtom = Atom(
-      name: '_RegisterTransactionControllerBase.description', context: context);
-
-  @override
-  String get description {
-    _$descriptionAtom.reportRead();
-    return super.description;
-  }
-
-  @override
-  set description(String value) {
-    _$descriptionAtom.reportWrite(value, super.description, () {
-      super.description = value;
-    });
-  }
-
   late final _$transactionTypeAtom = Atom(
       name: '_RegisterTransactionControllerBase.transactionType',
       context: context);
@@ -40,6 +24,38 @@ mixin _$RegisterTransactionController
   set transactionType(TransactionType value) {
     _$transactionTypeAtom.reportWrite(value, super.transactionType, () {
       super.transactionType = value;
+    });
+  }
+
+  late final _$valueAtom =
+      Atom(name: '_RegisterTransactionControllerBase.value', context: context);
+
+  @override
+  double get value {
+    _$valueAtom.reportRead();
+    return super.value;
+  }
+
+  @override
+  set value(double value) {
+    _$valueAtom.reportWrite(value, super.value, () {
+      super.value = value;
+    });
+  }
+
+  late final _$categoryAtom = Atom(
+      name: '_RegisterTransactionControllerBase.category', context: context);
+
+  @override
+  String get category {
+    _$categoryAtom.reportRead();
+    return super.category;
+  }
+
+  @override
+  set category(String value) {
+    _$categoryAtom.reportWrite(value, super.category, () {
+      super.category = value;
     });
   }
 
@@ -62,10 +78,35 @@ mixin _$RegisterTransactionController
   }
 
   @override
+  void setValue(double newValue) {
+    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
+        .startAction(name: '_RegisterTransactionControllerBase.setValue');
+    try {
+      return super.setValue(newValue);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCategory(String value) {
+    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
+        .startAction(name: '_RegisterTransactionControllerBase.setCategory');
+    try {
+      return super.setCategory(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-description: ${description},
-transactionType: ${transactionType}
+transactionType: ${transactionType},
+value: ${value},
+category: ${category}
     ''';
   }
 }

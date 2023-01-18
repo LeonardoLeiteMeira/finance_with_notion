@@ -23,17 +23,25 @@ import '../httpRequest/implementation/dio_impl.dart'
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
-_i1.GetIt $initGetIt(_i1.GetIt get,
-    {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
-  final gh = _i2.GetItHelper(get, environment, environmentFilter);
+_i1.GetIt $initGetIt(
+  _i1.GetIt get, {
+  String? environment,
+  _i2.EnvironmentFilter? environmentFilter,
+}) {
+  final gh = _i2.GetItHelper(
+    get,
+    environment,
+    environmentFilter,
+  );
   gh.lazySingleton<_i3.ExpensesController>(() => _i3.ExpensesController());
   gh.factory<_i4.HttpRequest>(() => _i5.DioImpl());
   gh.lazySingleton<_i6.RegisterTransactionController>(
       () => _i6.RegisterTransactionController());
   gh.singletonAsync<_i7.SharedPrefs>(() => _i7.SharedPrefs.create());
   gh.lazySingleton<_i8.TransactionDatabase>(() => _i9.NotionDatabase(
-      get<_i4.HttpRequest>(),
-      sharedPrefsToUnitTest: get<_i7.SharedPrefs>()));
+        get<_i4.HttpRequest>(),
+        sharedPrefsToUnitTest: get<_i7.SharedPrefs>(),
+      ));
   gh.factory<_i10.UserTransactionUsecase>(
       () => _i10.UserTransactionUsecase(get<_i8.TransactionDatabase>()));
   gh.lazySingleton<_i11.ListTransactionController>(

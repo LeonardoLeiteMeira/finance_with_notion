@@ -9,12 +9,21 @@ class RegisterTransactionController = _RegisterTransactionControllerBase
 
 abstract class _RegisterTransactionControllerBase with Store {
   @observable
-  String description = "";
-
-  @observable
   TransactionType transactionType = TransactionType.credit;
 
   @action
   void setTransactionTypeFromString(String value) =>
       transactionType = stringToTransactionTypeEnum(value);
+
+  @observable
+  double value = 0;
+
+  @action
+  void setValue(double newValue) => value = newValue;
+
+  @observable
+  String category = "";
+
+  @action
+  void setCategory(String value) => category = value;
 }

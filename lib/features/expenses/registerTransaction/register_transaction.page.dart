@@ -16,9 +16,17 @@ class RegisterTransactionPage extends StatefulWidget {
 
 class _RegisterTransactionPageState extends BaseStateWithController<
     RegisterTransactionPage, RegisterTransactionController> {
+  final valueController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
+  }
+
+  void saveTransaction() {
+    var result = _formKey.currentState!.validate();
+    print(result);
   }
 
   @override
@@ -27,29 +35,34 @@ class _RegisterTransactionPageState extends BaseStateWithController<
       appBar: AppBar(title: const Text("Enter Transaction")),
       body: SingleChildScrollView(
           child: Form(
+              key: _formKey,
               child: Column(
-        children: [
-          Observer(
-            builder: (_) => RadioButton(
-              firstOption: TransactionType.credit.asString(),
-              secondOption: TransactionType.debit.asString(),
-              thirdOprion: TransactionType.revenue.asString(),
-              selected: controller.transactionType.asString(),
-              onChange: controller.setTransactionTypeFromString,
-            ),
-          ),
-          const CashValue(),
-          TextFormField(
-            initialValue: "Dropdown To select transaction type",
-          ),
-          TextFormField(
-            initialValue: "Value",
-          ),
-          TextFormField(
-            initialValue: "Date - by default needs to be now",
-          ),
-        ],
-      ))),
+                children: [
+                  Observer(
+                    builder: (_) => RadioButton(
+                      firstOption: TransactionType.credit.asString(),
+                      secondOption: TransactionType.debit.asString(),
+                      thirdOprion: TransactionType.revenue.asString(),
+                      selected: controller.transactionType.asString(),
+                      onChange: controller.setTransactionTypeFromString,
+                    ),
+                  ),
+                  CashValue(
+                    controller: valueController,
+                  ),
+                  TextFormField(
+                    initialValue: "Dropdown To select transaction type",
+                  ),
+                  TextFormField(
+                    initialValue: "Value",
+                  ),
+                  TextFormField(
+                    initialValue: "Date - by default needs to be now",
+                  ),
+                  ElevatedButton(
+                      onPressed: saveTransaction, child: const Text("Save"))
+                ],
+              ))),
     );
   }
 }
