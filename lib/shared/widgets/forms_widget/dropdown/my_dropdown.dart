@@ -99,7 +99,6 @@ class _MyDropdownState extends State<MyDropdown> {
           color: Colors.blue, borderRadius: BorderRadius.circular(8)),
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-      // height: 30,
       child: InkWell(
         onTap: showOptions,
         child: DropdownOption(

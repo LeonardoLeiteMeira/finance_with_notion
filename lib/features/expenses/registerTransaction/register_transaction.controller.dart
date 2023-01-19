@@ -26,4 +26,10 @@ abstract class _RegisterTransactionControllerBase with Store {
 
   @action
   void setCategory(String value) => category = value;
+
+  @observable
+  DateTime transactionDate = DateTime.now();
+
+  @action
+  void setTransactionDate(DateTime value) => transactionDate = value;
 }

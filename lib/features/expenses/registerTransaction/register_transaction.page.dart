@@ -1,5 +1,7 @@
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_dropdown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -33,7 +35,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
 
   @override
   Widget build(BuildContext context) {
-    const double spaceBetweenFormItens = 10;
+    const double spaceBetweenFormItens = 12;
     return Scaffold(
       appBar: AppBar(title: const Text("Enter Transaction")),
       body: SingleChildScrollView(
@@ -41,6 +43,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
               key: _formKey,
               child: Column(
                 children: [
+                  const SizedBox(height: spaceBetweenFormItens),
                   Observer(
                     builder: (_) => RadioButton(
                       firstOption: TransactionType.credit.asString(),
@@ -68,11 +71,16 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   SelectCategory(
                       isSeconderyCategory: true,
                       selectCategory: () => print("Select category")),
-                  TextFormField(
-                    initialValue: "Value",
-                  ),
-                  TextFormField(
-                    initialValue: "Date - by default needs to be now",
+                  const SizedBox(height: spaceBetweenFormItens),
+                  Observer(
+                    builder: (_) => MyDatetimePicker(
+                      modalMode: CupertinoDatePickerMode.date,
+                      value: controller.transactionDate,
+                      onDateTimeChanged: (DateTime value) {
+                        controller.setTransactionDate(value);
+                        print(value);
+                      },
+                    ),
                   ),
                   ElevatedButton(
                       onPressed: saveTransaction, child: const Text("Save"))

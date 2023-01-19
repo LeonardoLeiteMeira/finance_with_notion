@@ -59,6 +59,23 @@ mixin _$RegisterTransactionController
     });
   }
 
+  late final _$transactionDateAtom = Atom(
+      name: '_RegisterTransactionControllerBase.transactionDate',
+      context: context);
+
+  @override
+  DateTime get transactionDate {
+    _$transactionDateAtom.reportRead();
+    return super.transactionDate;
+  }
+
+  @override
+  set transactionDate(DateTime value) {
+    _$transactionDateAtom.reportWrite(value, super.transactionDate, () {
+      super.transactionDate = value;
+    });
+  }
+
   late final _$_RegisterTransactionControllerBaseActionController =
       ActionController(
           name: '_RegisterTransactionControllerBase', context: context);
@@ -102,11 +119,25 @@ mixin _$RegisterTransactionController
   }
 
   @override
+  void setTransactionDate(DateTime value) {
+    final _$actionInfo =
+        _$_RegisterTransactionControllerBaseActionController.startAction(
+            name: '_RegisterTransactionControllerBase.setTransactionDate');
+    try {
+      return super.setTransactionDate(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 transactionType: ${transactionType},
 value: ${value},
-category: ${category}
+category: ${category},
+transactionDate: ${transactionDate}
     ''';
   }
 }

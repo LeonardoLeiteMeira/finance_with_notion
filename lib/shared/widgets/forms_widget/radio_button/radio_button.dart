@@ -37,7 +37,7 @@ class RadioButton extends FormField<String> {
                 margin: EdgeInsets.only(
                     left: sideMargin ?? 20, right: sideMargin ?? 20),
                 decoration: const BoxDecoration(),
-                padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
+                padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
