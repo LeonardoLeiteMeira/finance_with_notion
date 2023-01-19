@@ -28,6 +28,12 @@ abstract class _RegisterTransactionControllerBase with Store {
   void setCategory(String value) => category = value;
 
   @observable
+  String seconderyCategory = "";
+
+  @action
+  void setSecondaryCategory(String value) => category = value;
+
+  @observable
   DateTime transactionDate = DateTime.now();
 
   @action

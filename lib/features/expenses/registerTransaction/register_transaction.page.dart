@@ -58,8 +58,10 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                     controller: valueController,
                   ),
                   const SizedBox(height: spaceBetweenFormItens),
-                  SelectCategory(
-                      selectCategory: () => print("Select category")),
+                  SelectCategory(selectCategory: () {
+                    // controller.setCategory();
+                    print("Select category");
+                  }),
                   const SizedBox(height: spaceBetweenFormItens),
                   const Divider(
                     color: Colors.black,
@@ -70,7 +72,10 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   const SizedBox(height: spaceBetweenFormItens),
                   SelectCategory(
                       isSeconderyCategory: true,
-                      selectCategory: () => print("Select category")),
+                      selectCategory: () {
+                        // controller.setSecondaryCategory();
+                        print("Select category");
+                      }),
                   const SizedBox(height: spaceBetweenFormItens),
                   Observer(
                     builder: (_) => MyDatetimePicker(

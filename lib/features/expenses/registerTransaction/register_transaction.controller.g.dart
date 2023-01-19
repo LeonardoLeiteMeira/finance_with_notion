@@ -59,6 +59,23 @@ mixin _$RegisterTransactionController
     });
   }
 
+  late final _$seconderyCategoryAtom = Atom(
+      name: '_RegisterTransactionControllerBase.seconderyCategory',
+      context: context);
+
+  @override
+  String get seconderyCategory {
+    _$seconderyCategoryAtom.reportRead();
+    return super.seconderyCategory;
+  }
+
+  @override
+  set seconderyCategory(String value) {
+    _$seconderyCategoryAtom.reportWrite(value, super.seconderyCategory, () {
+      super.seconderyCategory = value;
+    });
+  }
+
   late final _$transactionDateAtom = Atom(
       name: '_RegisterTransactionControllerBase.transactionDate',
       context: context);
@@ -119,6 +136,19 @@ mixin _$RegisterTransactionController
   }
 
   @override
+  void setSecondaryCategory(String value) {
+    final _$actionInfo =
+        _$_RegisterTransactionControllerBaseActionController.startAction(
+            name: '_RegisterTransactionControllerBase.setSecondaryCategory');
+    try {
+      return super.setSecondaryCategory(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setTransactionDate(DateTime value) {
     final _$actionInfo =
         _$_RegisterTransactionControllerBaseActionController.startAction(
@@ -137,6 +167,7 @@ mixin _$RegisterTransactionController
 transactionType: ${transactionType},
 value: ${value},
 category: ${category},
+seconderyCategory: ${seconderyCategory},
 transactionDate: ${transactionDate}
     ''';
   }
