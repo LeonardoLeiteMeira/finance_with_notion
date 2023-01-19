@@ -51,7 +51,7 @@ class _MyDropdownState extends State<MyDropdown> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Container(
-          height: 300,
+          height: widget.dropdownContainerHeight ?? 300,
           decoration:
               const BoxDecoration(color: Color.fromARGB(255, 47, 136, 214)),
           child: Column(
