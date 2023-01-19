@@ -49,6 +49,7 @@ class RadioButton extends FormField<String> {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,

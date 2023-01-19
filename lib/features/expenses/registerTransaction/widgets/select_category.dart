@@ -2,9 +2,13 @@ import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_drop
 import 'package:flutter/material.dart';
 
 class SelectCategory extends StatelessWidget {
-  const SelectCategory({Key? key, required this.selectCategory})
+  const SelectCategory(
+      {Key? key,
+      required this.selectCategory,
+      this.isSeconderyCategory = false})
       : super(key: key);
   final void Function() selectCategory;
+  final bool isSeconderyCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +19,10 @@ class SelectCategory extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Expend category*",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              Text(
+                "Expend ${isSeconderyCategory ? "Secondary category" : "category*"}",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               InkWell(
                 child: const Text(
@@ -34,6 +39,7 @@ class SelectCategory extends StatelessWidget {
           hintText: "Select a category",
           options: const ["Opt1", "opt2", "opt3"],
           onSelectedItemChanged: (index) {
+            print(index);
             selectCategory();
           },
         ),

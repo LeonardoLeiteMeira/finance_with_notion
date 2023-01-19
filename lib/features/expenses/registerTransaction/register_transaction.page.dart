@@ -33,6 +33,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
 
   @override
   Widget build(BuildContext context) {
+    const double spaceBetweenFormItens = 10;
     return Scaffold(
       appBar: AppBar(title: const Text("Enter Transaction")),
       body: SingleChildScrollView(
@@ -49,24 +50,24 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                       onChange: controller.setTransactionTypeFromString,
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: spaceBetweenFormItens),
                   CashValue(
                     controller: valueController,
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: spaceBetweenFormItens),
                   SelectCategory(
                       selectCategory: () => print("Select category")),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: spaceBetweenFormItens),
                   const Divider(
                     color: Colors.black,
                     endIndent: 20,
                     indent: 20,
                     thickness: 1,
                   ),
-                  const SizedBox(height: 5),
-                  TextFormField(
-                    initialValue: "Dropdown To select transaction type",
-                  ),
+                  const SizedBox(height: spaceBetweenFormItens),
+                  SelectCategory(
+                      isSeconderyCategory: true,
+                      selectCategory: () => print("Select category")),
                   TextFormField(
                     initialValue: "Value",
                   ),

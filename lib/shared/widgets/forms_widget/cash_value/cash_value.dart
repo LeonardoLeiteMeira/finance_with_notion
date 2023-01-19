@@ -40,6 +40,7 @@ class _CashValueState extends State<CashValue> {
             "Value*",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             decoration: const BoxDecoration(
