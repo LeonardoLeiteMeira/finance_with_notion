@@ -1,6 +1,7 @@
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_dropdown.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/location_component/location_component.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
@@ -87,6 +88,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                       },
                     ),
                   ),
+                  LocationComponent(),
                   ElevatedButton(
                       onPressed: saveTransaction, child: const Text("Save"))
                 ],

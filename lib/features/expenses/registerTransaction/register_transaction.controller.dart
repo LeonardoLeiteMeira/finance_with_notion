@@ -1,4 +1,5 @@
 import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
+import 'package:finance_with_notion/usecase/location_usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 part 'register_transaction.controller.g.dart';
@@ -8,6 +9,10 @@ class RegisterTransactionController = _RegisterTransactionControllerBase
     with _$RegisterTransactionController;
 
 abstract class _RegisterTransactionControllerBase with Store {
+  final LocationUseCase _locationUseCase;
+
+  _RegisterTransactionControllerBase(this._locationUseCase);
+
   @observable
   TransactionType transactionType = TransactionType.credit;
 
@@ -38,4 +43,8 @@ abstract class _RegisterTransactionControllerBase with Store {
 
   @action
   void setTransactionDate(DateTime value) => transactionDate = value;
+
+  void getLocation() {
+    _locationUseCase.getUserLocation();
+  }
 }

@@ -48,23 +48,27 @@ class _CashValueState extends State<CashValue> {
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: CupertinoTextFormFieldRow(
-                padding: const EdgeInsets.all(10),
-                validator: widget.validator,
-                placeholder: "Insert value",
-                placeholderStyle:
-                    const TextStyle(color: Color.fromARGB(255, 203, 198, 198)),
-                decoration: const BoxDecoration(
-                  color: _inputColor,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                style: const TextStyle(color: Colors.white),
-                keyboardType: const TextInputType.numberWithOptions(
-                    decimal: true, signed: false),
-                controller: widget.controller,
-                //TODO set dynamic symbol
-                inputFormatters: [
-                  CurrencyTextInputFormatter(symbol: "€", enableNegative: false)
-                ]),
+              // toolbarOptions: ToolbarOptions(paste: true),
+
+              padding: const EdgeInsets.all(10),
+              validator: widget.validator,
+              placeholder: "Insert value",
+              placeholderStyle:
+                  const TextStyle(color: Color.fromARGB(255, 203, 198, 198)),
+              decoration: const BoxDecoration(
+                color: _inputColor,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              style: const TextStyle(color: Colors.white),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              textInputAction: TextInputAction.done,
+              controller: widget.controller,
+              //TODO set dynamic symbol
+              inputFormatters: [
+                CurrencyTextInputFormatter(symbol: "€", enableNegative: false)
+              ],
+            ),
           ),
         ],
       ),
