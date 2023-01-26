@@ -1,23 +1,35 @@
 PODS:
   - Flutter (1.0.0)
+  - geocoding (1.0.5):
+    - Flutter
+  - location (0.0.1):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - geocoding (from `.symlinks/plugins/geocoding/ios`)
+  - location (from `.symlinks/plugins/location/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  geocoding:
+    :path: ".symlinks/plugins/geocoding/ios"
+  location:
+    :path: ".symlinks/plugins/location/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
+  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
   shared_preferences_foundation: 3d2c799fb2ff809e53f07a8517d24c441ad22e65
 
-PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
 COCOAPODS: 1.11.3

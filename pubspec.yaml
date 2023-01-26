@@ -61,6 +61,10 @@ dependencies:
   #Formatter
   currency_text_input_formatter: ^2.1.8
 
+  #Location
+  location: ^4.2.0
+  geocoding: ^2.0.5
+
 
 dev_dependencies:
   flutter_test:
