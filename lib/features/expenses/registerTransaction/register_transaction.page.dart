@@ -1,4 +1,5 @@
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/account_card.dart';
+import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/note_text_field.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/location_component/location_component.dart';
@@ -23,6 +24,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
     RegisterTransactionPage, RegisterTransactionController> {
   final valueController = TextEditingController();
   final locationController = TextEditingController();
+  final noteController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -94,6 +96,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   ),
                   AccountOrCardSelection(
                       selectOrigin: (String value) => print(value)),
+                  NoteTextField(textController: noteController),
                   ElevatedButton(
                       onPressed: saveTransaction, child: const Text("Save"))
                 ],

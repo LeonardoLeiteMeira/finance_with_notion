@@ -48,8 +48,6 @@ class _CashValueState extends State<CashValue> {
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: CupertinoTextFormFieldRow(
-              // toolbarOptions: ToolbarOptions(paste: true),
-
               padding: const EdgeInsets.all(10),
               validator: widget.validator,
               placeholder: "Insert value",
