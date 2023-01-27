@@ -52,8 +52,7 @@ class _MyDropdownState extends State<MyDropdown> {
       context: context,
       builder: (BuildContext context) => Container(
           height: widget.dropdownContainerHeight ?? 300,
-          decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 47, 136, 214)),
+          decoration: const BoxDecoration(color: Colors.white),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
@@ -63,10 +62,7 @@ class _MyDropdownState extends State<MyDropdown> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CupertinoButton(
-                    child: const Text(
-                      "Select",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: const Text("Select"),
                     onPressed: () => onClickSelectButton(context),
                   ),
                 ],
@@ -82,7 +78,7 @@ class _MyDropdownState extends State<MyDropdown> {
                     widget.options.length,
                     (index) => Text(
                       widget.options[index],
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ),

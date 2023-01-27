@@ -64,10 +64,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   const SizedBox(height: spaceBetweenFormItens),
                   CashValue(controller: valueController),
                   const SizedBox(height: spaceBetweenFormItens),
-                  SelectCategory(selectCategory: () {
-                    // controller.setCategory();
-                    print("Select category");
-                  }),
+                  SelectCategory(selectCategory: controller.setCategory),
                   const SizedBox(height: spaceBetweenFormItens),
                   const Divider(
                     color: Colors.black,
@@ -78,10 +75,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   const SizedBox(height: spaceBetweenFormItens),
                   SelectCategory(
                       isSeconderyCategory: true,
-                      selectCategory: () {
-                        // controller.setSecondaryCategory();
-                        print("Select category");
-                      }),
+                      selectCategory: controller.setSecondaryCategory),
                   const SizedBox(height: spaceBetweenFormItens),
                   Observer(
                     builder: (_) => MyDatetimePicker(

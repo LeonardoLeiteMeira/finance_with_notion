@@ -1,4 +1,5 @@
 import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_dropdown.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -7,8 +8,11 @@ class SelectCategory extends StatelessWidget {
       required this.selectCategory,
       this.isSeconderyCategory = false})
       : super(key: key);
-  final void Function() selectCategory;
+  final void Function(String value) selectCategory;
   final bool isSeconderyCategory;
+
+  //TODO get categories from notion
+  static const _categories = ["Opt1", "opt2", "opt3"];
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +41,10 @@ class SelectCategory extends StatelessWidget {
         const SizedBox(height: 8),
         MyDropdown(
           hintText: "Select a category",
-          options: const ["Opt1", "opt2", "opt3"],
+          options: _categories,
           onSelectedItemChanged: (index) {
             print(index);
-            selectCategory();
+            selectCategory(_categories[index]);
           },
         ),
       ],
