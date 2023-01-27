@@ -1,5 +1,4 @@
-import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_dropdown.dart';
-import 'package:flutter/foundation.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/dropdown.dart';
 import 'package:flutter/material.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -16,38 +15,14 @@ class SelectCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Expend ${isSeconderyCategory ? "Secondary category" : "category*"}",
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              InkWell(
-                child: const Text(
-                  "Edit Categories",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-                onTap: () => print("edit categories"),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        MyDropdown(
-          hintText: "Select a category",
-          options: _categories,
-          onSelectedItemChanged: (index) {
-            print(index);
-            selectCategory(_categories[index]);
-          },
-        ),
-      ],
+    return Dropdown(
+      hintText: "Select a category",
+      options: _categories,
+      title:
+          "Expend ${isSeconderyCategory ? "Secondary category" : "category*"}",
+      linkButtonTitle: "Edit Categories",
+      linkButtonAction: () => print("edit categories"),
+      selectOption: selectCategory,
     );
   }
 }

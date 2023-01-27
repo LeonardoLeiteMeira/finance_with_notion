@@ -1,4 +1,4 @@
-import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/widgets/option.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/base_dropdown/widgets/option.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
