@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:location/location.dart';
 
@@ -7,7 +8,7 @@ import 'location_data_model.dart';
 class LocationService {
   Future<LocationDataModel> getLocation() async {
     try {
-      if (false) {
+      if (kDebugMode) {
         return _mockLocation();
       } else {
         return await _realLocation();

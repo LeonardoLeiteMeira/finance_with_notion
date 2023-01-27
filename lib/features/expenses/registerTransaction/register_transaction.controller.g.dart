@@ -93,6 +93,22 @@ mixin _$RegisterTransactionController
     });
   }
 
+  late final _$locationAtom = Atom(
+      name: '_RegisterTransactionControllerBase.location', context: context);
+
+  @override
+  String get location {
+    _$locationAtom.reportRead();
+    return super.location;
+  }
+
+  @override
+  set location(String value) {
+    _$locationAtom.reportWrite(value, super.location, () {
+      super.location = value;
+    });
+  }
+
   late final _$_RegisterTransactionControllerBaseActionController =
       ActionController(
           name: '_RegisterTransactionControllerBase', context: context);
@@ -162,13 +178,26 @@ mixin _$RegisterTransactionController
   }
 
   @override
+  void setLocation(String value) {
+    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
+        .startAction(name: '_RegisterTransactionControllerBase.setLocation');
+    try {
+      return super.setLocation(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 transactionType: ${transactionType},
 value: ${value},
 category: ${category},
 seconderyCategory: ${seconderyCategory},
-transactionDate: ${transactionDate}
+transactionDate: ${transactionDate},
+location: ${location}
     ''';
   }
 }

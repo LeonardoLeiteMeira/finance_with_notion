@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
 import 'location_component_controller.dart';
 
 class LocationComponent extends StatefulWidget {
   final TextEditingController? textEditingController;
-  const LocationComponent({Key? key, this.textEditingController})
+  final Function(String error)? setError;
+  const LocationComponent({Key? key, this.textEditingController, this.setError})
       : super(key: key);
 
   @override
@@ -27,6 +29,15 @@ class _LocationComponentState extends State<LocationComponent> {
     super.initState();
   }
 
+  void getLocation() async {
+    _controller.setLoading(true);
+    var location = await _controller.getLocationText();
+    if (location == "" && widget.setError != null) {
+      widget.setError!("Error to get Location");
+    }
+    _controller.setLoading(false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,29 +54,32 @@ class _LocationComponentState extends State<LocationComponent> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    color: _inputColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: IconButton(
-                      onPressed: () {
-                        //TODO set value
-                        _controller
-                            .getLocationText()
-                            .then((value) => print(value));
-                      },
-                      icon: const Icon(
-                        Icons.pin_drop,
-                        color: Colors.white,
-                      )),
-                ),
+                    decoration: const BoxDecoration(
+                      color: _inputColor,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Observer(
+                      builder: (_) => _controller.loading
+                          ? const Padding(
+                              padding: EdgeInsets.all(8),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : IconButton(
+                              onPressed: getLocation,
+                              icon: const Icon(
+                                Icons.pin_drop,
+                                color: Colors.white,
+                              )),
+                    )),
                 const SizedBox(width: 5),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color(0x00f6f6f6),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(8)),
                         border: Border.all(color: Colors.black)),
                     child: CupertinoTextFormFieldRow(
                       textInputAction: TextInputAction.done,

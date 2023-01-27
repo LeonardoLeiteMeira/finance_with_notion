@@ -1,7 +1,6 @@
 import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
 import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 
-// import 'notionTypes/notion_title.dart';
 import 'notionTypes/notion_date.dart';
 import 'notionTypes/notion_multi_select.dart';
 import 'notionTypes/notion_number.dart';
@@ -51,7 +50,7 @@ class NotionParser {
         properties[NotionDatabaseColumns.note.nameInNotionDatabase]);
 
     var origin = NotionSelect.fromJson(
-        properties[NotionDatabaseColumns.origin.nameInNotionDatabase]);
+        properties[NotionDatabaseColumns.account.nameInNotionDatabase]);
 
     return UserTransaction(
         transactionId,

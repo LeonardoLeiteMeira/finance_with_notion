@@ -9,7 +9,7 @@ enum NotionDatabaseColumns {
   date,
   location,
   note,
-  origin
+  account
 }
 
 extension NotionDatabaseColumnsName on NotionDatabaseColumns {
@@ -39,8 +39,8 @@ extension NotionDatabaseColumnsName on NotionDatabaseColumns {
       case NotionDatabaseColumns.note:
         return "Note";
 
-      case NotionDatabaseColumns.origin:
-        return "Origin";
+      case NotionDatabaseColumns.account:
+        return "Account/Card";
     }
   }
 
@@ -70,7 +70,7 @@ extension NotionDatabaseColumnsName on NotionDatabaseColumns {
       case NotionDatabaseColumns.note:
         return NotionPropertiesTypes.richText;
 
-      case NotionDatabaseColumns.origin:
+      case NotionDatabaseColumns.account:
         return NotionPropertiesTypes.select;
     }
   }

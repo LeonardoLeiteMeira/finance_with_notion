@@ -60,8 +60,8 @@ class _CashValueState extends State<CashValue> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               style: const TextStyle(color: Colors.white),
-              keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                  signed: true, decimal: true),
               textInputAction: TextInputAction.done,
               controller: widget.controller,
               //TODO set dynamic symbol

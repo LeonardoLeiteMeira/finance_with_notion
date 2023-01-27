@@ -1,6 +1,5 @@
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
-import 'package:finance_with_notion/shared/widgets/forms_widget/dropdown/my_dropdown.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/location_component/location_component.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +21,7 @@ class RegisterTransactionPage extends StatefulWidget {
 class _RegisterTransactionPageState extends BaseStateWithController<
     RegisterTransactionPage, RegisterTransactionController> {
   final valueController = TextEditingController();
+  final locationController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -32,6 +32,13 @@ class _RegisterTransactionPageState extends BaseStateWithController<
   void saveTransaction() {
     var result = _formKey.currentState!.validate();
     print(result);
+  }
+
+  void showError(String errorMessage) {
+    //TODO create default snackbar to show error
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(errorMessage),
+    ));
   }
 
   @override
@@ -55,9 +62,7 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                     ),
                   ),
                   const SizedBox(height: spaceBetweenFormItens),
-                  CashValue(
-                    controller: valueController,
-                  ),
+                  CashValue(controller: valueController),
                   const SizedBox(height: spaceBetweenFormItens),
                   SelectCategory(selectCategory: () {
                     // controller.setCategory();
@@ -88,7 +93,10 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                       },
                     ),
                   ),
-                  LocationComponent(),
+                  LocationComponent(
+                    textEditingController: locationController,
+                    setError: showError,
+                  ),
                   ElevatedButton(
                       onPressed: saveTransaction, child: const Text("Save"))
                 ],

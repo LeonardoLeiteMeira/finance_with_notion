@@ -44,6 +44,12 @@ abstract class _RegisterTransactionControllerBase with Store {
   @action
   void setTransactionDate(DateTime value) => transactionDate = value;
 
+  @observable
+  String location = "";
+
+  @action
+  void setLocation(String value) => location = value;
+
   void getLocation() {
     _locationUseCase.getUserLocation();
   }

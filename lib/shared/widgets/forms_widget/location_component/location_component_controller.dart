@@ -14,14 +14,18 @@ abstract class _LocationComponentControllerBase with Store {
 
   _LocationComponentControllerBase(this._locationUseCase);
 
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool value) => loading = value;
+
   Future<String> getLocationText() async {
-    //TODO loading
     var result = await _locationUseCase.getUserLocation();
     if (result.isSuccess) {
       textController.text = result.data!;
       return result.data!;
     }
-    //TODO Set error
     return "";
   }
 }
