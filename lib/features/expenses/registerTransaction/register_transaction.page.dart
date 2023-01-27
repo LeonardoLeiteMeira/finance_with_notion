@@ -97,8 +97,23 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   AccountOrCardSelection(
                       selectOrigin: (String value) => print(value)),
                   NoteTextField(textController: noteController),
-                  ElevatedButton(
-                      onPressed: saveTransaction, child: const Text("Save"))
+                  //TODO finish buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF2FD48D)),
+                          onPressed: saveTransaction,
+                          child: const Text("Save")),
+                      const SizedBox(width: 5),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0XFFE30F0F)),
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Cancel"))
+                    ],
+                  )
                 ],
               ))),
     );
