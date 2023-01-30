@@ -3,13 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:finance_with_notion/shared/config/shared_prefs.dart' as _i5;
+import 'package:finance_with_notion/shared/config/shared_prefs.dart' as _i6;
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart'
-    as _i3;
+    as _i4;
+import 'package:finance_with_notion/shared/httpRequest/implementation/my_response_model.dart'
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/shared_preferences.dart' as _i2;
+import 'package:shared_preferences/shared_preferences.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,9 +24,19 @@ import 'package:shared_preferences/shared_preferences.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeSharedPreferences_0 extends _i1.SmartFake
-    implements _i2.SharedPreferences {
-  _FakeSharedPreferences_0(
+class _FakeMyResponse_0<T> extends _i1.SmartFake implements _i2.MyResponse<T> {
+  _FakeMyResponse_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSharedPreferences_1 extends _i1.SmartFake
+    implements _i3.SharedPreferences {
+  _FakeSharedPreferences_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -36,7 +48,7 @@ class _FakeSharedPreferences_0 extends _i1.SmartFake
 /// A class which mocks [HttpRequest].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
+class MockHttpRequest extends _i1.Mock implements _i4.HttpRequest {
   MockHttpRequest() {
     _i1.throwOnMissingStub(this);
   }
@@ -58,15 +70,22 @@ class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<dynamic> get(String? url) => (super.noSuchMethod(
+  _i5.Future<_i2.MyResponse<dynamic>> get(String? url) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [url],
         ),
-        returnValue: _i4.Future<dynamic>.value(),
-      ) as _i4.Future<dynamic>);
+        returnValue: _i5.Future<_i2.MyResponse<dynamic>>.value(
+            _FakeMyResponse_0<dynamic>(
+          this,
+          Invocation.method(
+            #get,
+            [url],
+          ),
+        )),
+      ) as _i5.Future<_i2.MyResponse<dynamic>>);
   @override
-  _i4.Future<dynamic> put(
+  _i5.Future<_i2.MyResponse<dynamic>> put(
     String? url, {
     Map<String, dynamic>? body,
   }) =>
@@ -76,10 +95,18 @@ class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
           [url],
           {#body: body},
         ),
-        returnValue: _i4.Future<dynamic>.value(),
-      ) as _i4.Future<dynamic>);
+        returnValue: _i5.Future<_i2.MyResponse<dynamic>>.value(
+            _FakeMyResponse_0<dynamic>(
+          this,
+          Invocation.method(
+            #put,
+            [url],
+            {#body: body},
+          ),
+        )),
+      ) as _i5.Future<_i2.MyResponse<dynamic>>);
   @override
-  _i4.Future<dynamic> post(
+  _i5.Future<_i2.MyResponse<dynamic>> post(
     String? url, {
     Map<String, dynamic>? body,
   }) =>
@@ -89,10 +116,18 @@ class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
           [url],
           {#body: body},
         ),
-        returnValue: _i4.Future<dynamic>.value(),
-      ) as _i4.Future<dynamic>);
+        returnValue: _i5.Future<_i2.MyResponse<dynamic>>.value(
+            _FakeMyResponse_0<dynamic>(
+          this,
+          Invocation.method(
+            #post,
+            [url],
+            {#body: body},
+          ),
+        )),
+      ) as _i5.Future<_i2.MyResponse<dynamic>>);
   @override
-  _i4.Future<dynamic> delete(
+  _i5.Future<_i2.MyResponse<dynamic>> delete(
     String? url, {
     Map<String, dynamic>? body,
   }) =>
@@ -102,10 +137,18 @@ class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
           [url],
           {#body: body},
         ),
-        returnValue: _i4.Future<dynamic>.value(),
-      ) as _i4.Future<dynamic>);
+        returnValue: _i5.Future<_i2.MyResponse<dynamic>>.value(
+            _FakeMyResponse_0<dynamic>(
+          this,
+          Invocation.method(
+            #delete,
+            [url],
+            {#body: body},
+          ),
+        )),
+      ) as _i5.Future<_i2.MyResponse<dynamic>>);
   @override
-  _i4.Future<dynamic> patch(
+  _i5.Future<_i2.MyResponse<dynamic>> patch(
     String? url, {
     Map<String, dynamic>? body,
   }) =>
@@ -115,14 +158,22 @@ class MockHttpRequest extends _i1.Mock implements _i3.HttpRequest {
           [url],
           {#body: body},
         ),
-        returnValue: _i4.Future<dynamic>.value(),
-      ) as _i4.Future<dynamic>);
+        returnValue: _i5.Future<_i2.MyResponse<dynamic>>.value(
+            _FakeMyResponse_0<dynamic>(
+          this,
+          Invocation.method(
+            #patch,
+            [url],
+            {#body: body},
+          ),
+        )),
+      ) as _i5.Future<_i2.MyResponse<dynamic>>);
 }
 
 /// A class which mocks [SharedPrefs].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPrefs extends _i1.Mock implements _i5.SharedPrefs {
+class MockSharedPrefs extends _i1.Mock implements _i6.SharedPrefs {
   MockSharedPrefs() {
     _i1.throwOnMissingStub(this);
   }
@@ -154,20 +205,20 @@ class MockSharedPrefs extends _i1.Mock implements _i5.SharedPrefs {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<_i2.SharedPreferences> init() => (super.noSuchMethod(
+  _i5.Future<_i3.SharedPreferences> init() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
         ),
         returnValue:
-            _i4.Future<_i2.SharedPreferences>.value(_FakeSharedPreferences_0(
+            _i5.Future<_i3.SharedPreferences>.value(_FakeSharedPreferences_1(
           this,
           Invocation.method(
             #init,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.SharedPreferences>);
+      ) as _i5.Future<_i3.SharedPreferences>);
   @override
   void saveString(
     String? key,

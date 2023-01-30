@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
+import 'package:finance_with_notion/shared/httpRequest/implementation/my_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -42,21 +43,29 @@ class DioImpl implements HttpRequest {
   }
 
   @override
-  Future<dynamic> delete(String url, {Map<String, dynamic>? body}) async =>
-      _dio.delete(url, data: body);
+  Future<MyResponse> delete(String url, {Map<String, dynamic>? body}) async =>
+      _dio
+          .delete(url, data: body)
+          .then((response) => MyResponse.fromDioResponse(response));
 
   @override
-  Future<dynamic> get(String url) async => _dio.get(url);
+  Future<MyResponse> get(String url) async =>
+      _dio.get(url).then((response) => MyResponse.fromDioResponse(response));
 
   @override
-  Future<dynamic> patch(String url, {Map<String, dynamic>? body}) async =>
-      _dio.patch(url, data: body);
+  Future<MyResponse> patch(String url, {Map<String, dynamic>? body}) async =>
+      _dio
+          .patch(url, data: body)
+          .then((response) => MyResponse.fromDioResponse(response));
 
   @override
-  Future<dynamic> post(String url, {Map<String, dynamic>? body}) async =>
-      _dio.post(url, data: body);
+  Future<MyResponse> post(String url, {Map<String, dynamic>? body}) async =>
+      _dio
+          .post(url, data: body)
+          .then((response) => MyResponse.fromDioResponse(response));
 
   @override
-  Future<dynamic> put(String url, {Map<String, dynamic>? body}) async =>
-      _dio.put(url, data: body);
+  Future<MyResponse> put(String url, {Map<String, dynamic>? body}) async => _dio
+      .put(url, data: body)
+      .then((response) => MyResponse.fromDioResponse(response));
 }
