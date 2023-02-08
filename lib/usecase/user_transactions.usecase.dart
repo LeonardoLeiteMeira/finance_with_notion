@@ -10,9 +10,16 @@ class UserTransactionUsecase extends BaseUsecase {
 
   UserTransactionUsecase(this._transactionDatabase);
 
+  //TODO: Local databse to cache items
+
   Future<Result<UserTransactionList>> getUserTransactions() =>
       safeCall(() async {
         var transactionList = await _transactionDatabase.getTransactions();
         return transactionList;
+      });
+
+  Future<Result<List<String>>> getUserCategories() => safeCall(() async {
+        var categories = await _transactionDatabase.getCategories();
+        return categories;
       });
 }

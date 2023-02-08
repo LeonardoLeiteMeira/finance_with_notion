@@ -29,6 +29,7 @@ class LocationService {
       //TODO Create error to get location
       throw ("Error to get location");
     }
+
     return LocationDataModel(
         latitude: currentLocation.latitude!,
         longitude: currentLocation.longitude!);

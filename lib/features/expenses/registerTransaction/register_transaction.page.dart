@@ -10,7 +10,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../shared/models/enum/transaction_type.dart';
 import '../../../shared/widgets/forms_widget/radio_button/radio_button.dart';
 import 'register_transaction.controller.dart';
-import 'widgets/select_category.dart';
+import 'widgets/select_category/select_category.dart';
 
 class RegisterTransactionPage extends StatefulWidget {
   const RegisterTransactionPage({Key? key}) : super(key: key);
@@ -44,78 +44,105 @@ class _RegisterTransactionPageState extends BaseStateWithController<
     ));
   }
 
+  TextStyle buttonTextStyle() => const TextStyle(
+        fontSize: 16,
+      );
+
   @override
   Widget build(BuildContext context) {
     const double spaceBetweenFormItens = 12;
+    const double buttonWidth = 150;
+    const double buttonHeigth = 60;
     return Scaffold(
       appBar: AppBar(title: const Text("Enter Transaction")),
       body: SingleChildScrollView(
-          child: Form(
-              key: _formKey,
-              child: Column(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const SizedBox(height: spaceBetweenFormItens),
+              Observer(
+                builder: (_) => RadioButton(
+                  firstOption: TransactionType.credit.asString(),
+                  secondOption: TransactionType.debit.asString(),
+                  thirdOprion: TransactionType.revenue.asString(),
+                  selected: controller.transactionType.asString(),
+                  onChange: controller.setTransactionTypeFromString,
+                ),
+              ),
+              const SizedBox(height: spaceBetweenFormItens),
+              CashValue(controller: valueController),
+              const SizedBox(height: spaceBetweenFormItens),
+              SelectCategory(selectCategory: controller.setCategory),
+              const SizedBox(height: spaceBetweenFormItens),
+              const Divider(
+                color: Colors.black,
+                endIndent: 20,
+                indent: 20,
+                thickness: 1,
+              ),
+              const SizedBox(height: spaceBetweenFormItens),
+              SelectCategory(
+                  isSeconderyCategory: true,
+                  selectCategory: controller.setSecondaryCategory),
+              const SizedBox(height: spaceBetweenFormItens),
+              Observer(
+                builder: (_) => MyDatetimePicker(
+                  modalMode: CupertinoDatePickerMode.date,
+                  value: controller.transactionDate,
+                  onDateTimeChanged: (DateTime value) {
+                    controller.setTransactionDate(value);
+                    print(value);
+                  },
+                ),
+              ),
+              const SizedBox(height: spaceBetweenFormItens),
+              LocationComponent(
+                textEditingController: locationController,
+                setError: showError,
+              ),
+              const SizedBox(height: spaceBetweenFormItens),
+              AccountOrCardSelection(
+                  selectOrigin: (String value) => print(value)),
+              const SizedBox(height: spaceBetweenFormItens),
+              NoteTextField(textController: noteController),
+              const SizedBox(height: spaceBetweenFormItens),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: spaceBetweenFormItens),
-                  Observer(
-                    builder: (_) => RadioButton(
-                      firstOption: TransactionType.credit.asString(),
-                      secondOption: TransactionType.debit.asString(),
-                      thirdOprion: TransactionType.revenue.asString(),
-                      selected: controller.transactionType.asString(),
-                      onChange: controller.setTransactionTypeFromString,
-                    ),
+                  SizedBox(
+                    width: buttonWidth,
+                    height: buttonHeigth,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2FD48D)),
+                        onPressed: saveTransaction,
+                        child: Text(
+                          "Save",
+                          style: buttonTextStyle(),
+                        )),
                   ),
-                  const SizedBox(height: spaceBetweenFormItens),
-                  CashValue(controller: valueController),
-                  const SizedBox(height: spaceBetweenFormItens),
-                  SelectCategory(selectCategory: controller.setCategory),
-                  const SizedBox(height: spaceBetweenFormItens),
-                  const Divider(
-                    color: Colors.black,
-                    endIndent: 20,
-                    indent: 20,
-                    thickness: 1,
-                  ),
-                  const SizedBox(height: spaceBetweenFormItens),
-                  SelectCategory(
-                      isSeconderyCategory: true,
-                      selectCategory: controller.setSecondaryCategory),
-                  const SizedBox(height: spaceBetweenFormItens),
-                  Observer(
-                    builder: (_) => MyDatetimePicker(
-                      modalMode: CupertinoDatePickerMode.date,
-                      value: controller.transactionDate,
-                      onDateTimeChanged: (DateTime value) {
-                        controller.setTransactionDate(value);
-                        print(value);
-                      },
-                    ),
-                  ),
-                  LocationComponent(
-                    textEditingController: locationController,
-                    setError: showError,
-                  ),
-                  AccountOrCardSelection(
-                      selectOrigin: (String value) => print(value)),
-                  NoteTextField(textController: noteController),
-                  //TODO finish buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF2FD48D)),
-                          onPressed: saveTransaction,
-                          child: const Text("Save")),
-                      const SizedBox(width: 5),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0XFFE30F0F)),
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text("Cancel"))
-                    ],
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: buttonWidth,
+                    height: buttonHeigth,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFE30F0F),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(
+                          "Cancel",
+                          style: buttonTextStyle(),
+                        )),
                   )
                 ],
-              ))),
+              ),
+              const SizedBox(height: spaceBetweenFormItens * 2),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

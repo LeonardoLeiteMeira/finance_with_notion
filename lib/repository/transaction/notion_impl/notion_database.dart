@@ -1,3 +1,5 @@
+import 'package:finance_with_notion/repository/transaction/notion_impl/enum/notion_database_columns_enum.dart';
+import 'package:finance_with_notion/repository/transaction/notion_impl/notionTypes/notion_database_metadata/notion_database_metadata.dart';
 import 'package:finance_with_notion/repository/transaction/transaction_database.dart';
 import 'package:finance_with_notion/shared/config/shared_prefs.dart';
 import 'package:finance_with_notion/shared/httpRequest/http_request.dart';
@@ -16,6 +18,7 @@ class NotionDatabase implements TransactionDatabase {
   late final SharedPrefs _sharedPrefs;
   final String _notionApiUrl = "https://api.notion.com/v1";
   final String _templateDeleteUrl = "/blocks/{id}";
+  final String _templateDatabasePropertiesUrl = "/databases/{id}";
   final String _templateGetTransactionsUrl = "/databases/{id}/query";
   static const String _notionVersion = "2022-02-22";
   static const String _contentType = "application/json";
@@ -89,4 +92,40 @@ class NotionDatabase implements TransactionDatabase {
   Future<void> insertTransaction(UserTransaction userTransaction) async {
     // TODO: implement insertTransaction
   }
+
+  Future<NotionDatabaseMetadata> _getDatabaseProperties() async {
+    var databaseId = _sharedPrefs.notionDatabaseId;
+    var getDatabaseUrl =
+        _templateDatabasePropertiesUrl.replaceAll("{id}", databaseId);
+    var fullUrl = _notionApiUrl + getDatabaseUrl;
+
+    var response = await _httpRequest.get(fullUrl);
+
+    if (response.statusCode == 200) {
+      return NotionDatabaseMetadata.fromJson(response.data);
+    }
+    throw (NotionError(
+        "${response.statusCode} - ${response.statusMessage} - ${response.data}"));
+  }
+
+  Future<List<String>> _getSelectOptions(NotionDatabaseColumns column) async {
+    var selectOptions = <String>[];
+    var databaseMetadata = await _getDatabaseProperties();
+    var selectOptionsJson = databaseMetadata
+        .properties![column.nameInNotionDatabase]!
+        .propertyDetails!["options"] as List;
+
+    for (Map option in selectOptionsJson) {
+      selectOptions.add(option["name"]);
+    }
+    return selectOptions;
+  }
+
+  @override
+  Future<List<String>> getCategories() async =>
+      _getSelectOptions(NotionDatabaseColumns.category);
+
+  @override
+  Future<List<String>> getTransactionsAccount() async =>
+      _getSelectOptions(NotionDatabaseColumns.account);
 }

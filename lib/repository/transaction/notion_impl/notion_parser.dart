@@ -49,7 +49,7 @@ class NotionParser {
     var note = NoptionRichText.fromJson(
         properties[NotionDatabaseColumns.note.nameInNotionDatabase]);
 
-    var origin = NotionSelect.fromJson(
+    var account = NotionSelect.fromJson(
         properties[NotionDatabaseColumns.account.nameInNotionDatabase]);
 
     return UserTransaction(
@@ -61,6 +61,6 @@ class NotionParser {
         category.value,
         secondaryCategory.value,
         location.value,
-        origin.value);
+        account.value);
   }
 }

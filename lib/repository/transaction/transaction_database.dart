@@ -7,4 +7,8 @@ abstract class TransactionDatabase {
   Future<UserTransactionList> getTransactions({String page});
 
   Future<void> deleteTransaction(String id);
+
+  Future<List<String>> getCategories();
+
+  Future<List<String>> getTransactionsAccount();
 }

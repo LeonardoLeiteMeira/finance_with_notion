@@ -13,6 +13,8 @@ import '../../features/expenses/listTransaction/list_transaction.controller.dart
     as _i13;
 import '../../features/expenses/registerTransaction/register_transaction.controller.dart'
     as _i8;
+import '../../features/expenses/registerTransaction/widgets/select_category/select_category_controller.dart'
+    as _i15;
 import '../../repository/transaction/notion_impl/notion_database.dart' as _i11;
 import '../../repository/transaction/transaction_database.dart' as _i10;
 import '../../usecase/location_usecase.dart' as _i7;
@@ -54,5 +56,7 @@ _i1.GetIt $initGetIt(
       () => _i13.ListTransactionController(get<_i12.UserTransactionUsecase>()));
   gh.factory<_i14.LocationComponentController>(
       () => _i14.LocationComponentController(get<_i7.LocationUseCase>()));
+  gh.factory<_i15.SelectCategoryController>(
+      () => _i15.SelectCategoryController(get<_i12.UserTransactionUsecase>()));
   return get;
 }
