@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:finance_with_notion/repository/transaction/notion_impl/notion_database.dart';
 import 'package:finance_with_notion/shared/config/shared_prefs.dart';
+import 'package:finance_with_notion/shared/httpRequest/implementation/my_response_model.dart';
 import 'package:finance_with_notion/shared/models/user_transaction_list_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -27,7 +29,9 @@ void main() {
   group("getTransactions", () {
     test("Success to get all", () async {
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
-          (_) async => ResponseMock(data: databaseData, statusCode: 200));
+          (_) async => ResponseMock(
+              responseData: databaseData, responseStatusCode: 200));
+
       var result = await notionDatabase.getTransactions();
 
       var entityToCheck = UserTransactionList(userTransactionList, "", false);
@@ -48,7 +52,8 @@ void main() {
       };
 
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
-          (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
+          (_) async => ResponseMock(
+              responseData: mockNotionResponse, responseStatusCode: 200));
       var result = await notionDatabase.getTransactions();
 
       var entityToCheck = UserTransactionList(
@@ -71,7 +76,8 @@ void main() {
       };
 
       when(httpRequest.post(any, body: anyNamed("body"))).thenAnswer(
-          (_) async => ResponseMock(data: mockNotionResponse, statusCode: 200));
+          (_) async => ResponseMock(
+              responseData: mockNotionResponse, responseStatusCode: 200));
 
       var result = await notionDatabase.getTransactions(page: startPageCursor);
 
@@ -92,8 +98,14 @@ void main() {
   });
 }
 
-class ResponseMock {
-  int statusCode;
-  dynamic data;
-  ResponseMock({required this.statusCode, required this.data});
+class ResponseMock extends MyResponse {
+  int responseStatusCode;
+
+  dynamic responseData;
+
+  ResponseMock({required this.responseStatusCode, required this.responseData})
+      : super.fromDioResponse(Response(
+            requestOptions: RequestOptions(path: ''),
+            data: responseData,
+            statusCode: responseStatusCode));
 }

@@ -93,7 +93,7 @@ var databaseData = {
             "color": "default"
           }
         },
-        "Origin": {
+        "Account/Card": {
           "id": "CjOs",
           "type": "select",
           "select": {
@@ -202,7 +202,7 @@ var databaseData = {
             "color": "blue"
           }
         },
-        "Origin": {
+        "Account/Card": {
           "id": "CjOs",
           "type": "select",
           "select": {
@@ -311,7 +311,7 @@ var databaseData = {
             "color": "yellow"
           }
         },
-        "Origin": {
+        "Account/Card": {
           "id": "CjOs",
           "type": "select",
           "select": {
