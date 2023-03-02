@@ -1,8 +1,10 @@
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/account_card/account_card.dart';
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/note_text_field.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/cancel_button/cancel_button.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/location_component/location_component.dart';
+import 'package:finance_with_notion/shared/widgets/forms_widget/save_button/save_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_with_notion/shared/base/base.page.dart';
@@ -51,8 +53,6 @@ class _RegisterTransactionPageState extends BaseStateWithController<
   @override
   Widget build(BuildContext context) {
     const double spaceBetweenFormItens = 12;
-    const double buttonWidth = 150;
-    const double buttonHeigth = 60;
     return Scaffold(
       appBar: AppBar(title: const Text("Enter Transaction")),
       body: SingleChildScrollView(
@@ -108,32 +108,9 @@ class _RegisterTransactionPageState extends BaseStateWithController<
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: buttonWidth,
-                    height: buttonHeigth,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF2FD48D)),
-                        onPressed: saveTransaction,
-                        child: Text(
-                          "Save",
-                          style: buttonTextStyle(),
-                        )),
-                  ),
+                  SaveButton(onPressed: saveTransaction),
                   const SizedBox(width: 20),
-                  SizedBox(
-                    width: buttonWidth,
-                    height: buttonHeigth,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFE30F0F),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                        child: Text(
-                          "Cancel",
-                          style: buttonTextStyle(),
-                        )),
-                  )
+                  const CancelButton()
                 ],
               ),
               const SizedBox(height: spaceBetweenFormItens * 2),
