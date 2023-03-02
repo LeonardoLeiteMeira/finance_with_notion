@@ -22,4 +22,9 @@ class UserTransactionUsecase extends BaseUsecase {
         var categories = await _transactionDatabase.getCategories();
         return categories;
       });
+
+  Future<Result<List<String>>> gettransactionAccount() => safeCall(() async {
+        var categories = await _transactionDatabase.getTransactionsAccount();
+        return categories;
+      });
 }

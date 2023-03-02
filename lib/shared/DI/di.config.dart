@@ -10,11 +10,13 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../../features/expenses/expenses.controller.dart' as _i3;
 import '../../features/expenses/listTransaction/list_transaction.controller.dart'
-    as _i13;
+    as _i14;
 import '../../features/expenses/registerTransaction/register_transaction.controller.dart'
     as _i8;
+import '../../features/expenses/registerTransaction/widgets/account_card/account_card_controller.dart'
+    as _i13;
 import '../../features/expenses/registerTransaction/widgets/select_category/select_category_controller.dart'
-    as _i15;
+    as _i16;
 import '../../repository/transaction/notion_impl/notion_database.dart' as _i11;
 import '../../repository/transaction/transaction_database.dart' as _i10;
 import '../../usecase/location_usecase.dart' as _i7;
@@ -24,7 +26,7 @@ import '../httpRequest/http_request.dart' as _i4;
 import '../httpRequest/implementation/dio_impl.dart' as _i5;
 import '../service/location_service/location_service.dart' as _i6;
 import '../widgets/forms_widget/location_component/location_component_controller.dart'
-    as _i14; // ignore_for_file: unnecessary_lambdas
+    as _i15; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -52,11 +54,13 @@ _i1.GetIt $initGetIt(
       ));
   gh.factory<_i12.UserTransactionUsecase>(
       () => _i12.UserTransactionUsecase(get<_i10.TransactionDatabase>()));
-  gh.lazySingleton<_i13.ListTransactionController>(
-      () => _i13.ListTransactionController(get<_i12.UserTransactionUsecase>()));
-  gh.factory<_i14.LocationComponentController>(
-      () => _i14.LocationComponentController(get<_i7.LocationUseCase>()));
-  gh.factory<_i15.SelectCategoryController>(
-      () => _i15.SelectCategoryController(get<_i12.UserTransactionUsecase>()));
+  gh.factory<_i13.AccountCardController>(
+      () => _i13.AccountCardController(get<_i12.UserTransactionUsecase>()));
+  gh.lazySingleton<_i14.ListTransactionController>(
+      () => _i14.ListTransactionController(get<_i12.UserTransactionUsecase>()));
+  gh.factory<_i15.LocationComponentController>(
+      () => _i15.LocationComponentController(get<_i7.LocationUseCase>()));
+  gh.factory<_i16.SelectCategoryController>(
+      () => _i16.SelectCategoryController(get<_i12.UserTransactionUsecase>()));
   return get;
 }

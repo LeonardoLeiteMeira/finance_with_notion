@@ -1,4 +1,4 @@
-import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/account_card.dart';
+import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/account_card/account_card.dart';
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/note_text_field.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
