@@ -30,6 +30,8 @@ abstract class _AccountCardControllerBase with Store {
     var result = await _transactionsUsecase.gettransactionAccount();
     if (result.isSuccess) {
       setAccountOrOrigins(result.data!);
+    } else {
+      print(result.error);
     }
     setLoading(false);
   }

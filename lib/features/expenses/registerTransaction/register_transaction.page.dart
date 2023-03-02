@@ -90,10 +90,8 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                 builder: (_) => MyDatetimePicker(
                   modalMode: CupertinoDatePickerMode.date,
                   value: controller.transactionDate,
-                  onDateTimeChanged: (DateTime value) {
-                    controller.setTransactionDate(value);
-                    print(value);
-                  },
+                  onDateTimeChanged: (DateTime value) =>
+                      controller.setTransactionDate(value),
                 ),
               ),
               const SizedBox(height: spaceBetweenFormItens),

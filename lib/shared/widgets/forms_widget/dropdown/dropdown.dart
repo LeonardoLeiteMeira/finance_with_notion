@@ -46,10 +46,7 @@ class Dropdown extends StatelessWidget {
         MyDropdown(
           hintText: hintText,
           options: options,
-          onSelectedItemChanged: (index) {
-            print(index);
-            selectOption(options[index]);
-          },
+          onSelectedItemChanged: (index) => selectOption(options[index]),
         ),
       ],
     );
