@@ -1,5 +1,7 @@
 import 'package:finance_with_notion/shared/models/enum/transaction_type.dart';
+import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:finance_with_notion/usecase/location_usecase.dart';
+import 'package:finance_with_notion/usecase/user_transactions.usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 part 'register_transaction.controller.g.dart';
@@ -10,33 +12,22 @@ class RegisterTransactionController = _RegisterTransactionControllerBase
 
 abstract class _RegisterTransactionControllerBase with Store {
   final LocationUseCase _locationUseCase;
+  final UserTransactionUsecase _userTransactionUsecase;
 
-  _RegisterTransactionControllerBase(this._locationUseCase);
+  _RegisterTransactionControllerBase(
+      this._locationUseCase, this._userTransactionUsecase);
+
+  @observable
+  bool isLoading = false;
+
+  @action
+  void setIsLoading(bool value) => isLoading = value;
 
   @observable
   TransactionType transactionType = TransactionType.credit;
 
   @action
-  void setTransactionTypeFromString(String value) =>
-      transactionType = stringToTransactionTypeEnum(value);
-
-  @observable
-  double value = 0;
-
-  @action
-  void setValue(double newValue) => value = newValue;
-
-  @observable
-  String category = "";
-
-  @action
-  void setCategory(String value) => category = value;
-
-  @observable
-  String seconderyCategory = "";
-
-  @action
-  void setSecondaryCategory(String value) => category = value;
+  void setTransactionType(TransactionType value) => transactionType = value;
 
   @observable
   DateTime transactionDate = DateTime.now();
@@ -44,13 +35,21 @@ abstract class _RegisterTransactionControllerBase with Store {
   @action
   void setTransactionDate(DateTime value) => transactionDate = value;
 
-  @observable
-  String location = "";
-
-  @action
-  void setLocation(String value) => location = value;
-
   void getLocation() {
     _locationUseCase.getUserLocation();
+  }
+
+  Future<bool> saveNewTransaction(UserTransaction newUserTransaction) async {
+    setIsLoading(true);
+    var result =
+        await _userTransactionUsecase.createNewTransaction(newUserTransaction);
+    setIsLoading(false);
+    if (result.isSuccess) {
+      //TODO show success snackbar
+      return true;
+    } else {
+      //TODO show error snackbar
+      return false;
+    }
   }
 }

@@ -89,7 +89,8 @@ class NotionDatabase implements TransactionDatabase {
   ///use Create a Page with Content endpoint
   ///post in https://api.notion.com/v1/pages/
   @override
-  Future<void> insertTransaction(UserTransaction userTransaction) async {
+  Future<bool> insertTransaction(UserTransaction userTransaction) async {
+    return false;
     // TODO: implement insertTransaction
   }
 

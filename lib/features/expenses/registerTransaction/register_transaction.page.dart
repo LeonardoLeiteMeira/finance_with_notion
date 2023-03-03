@@ -1,5 +1,6 @@
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/account_card/account_card.dart';
 import 'package:finance_with_notion/features/expenses/registerTransaction/widgets/note_text_field.dart';
+import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/cancel_button/cancel_button.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/cash_value/cash_value.dart';
 import 'package:finance_with_notion/shared/widgets/forms_widget/datetime_picker/my_datetime_picker.dart';
@@ -24,19 +25,51 @@ class RegisterTransactionPage extends StatefulWidget {
 
 class _RegisterTransactionPageState extends BaseStateWithController<
     RegisterTransactionPage, RegisterTransactionController> {
+  final _formKey = GlobalKey<FormState>();
+
   final valueController = TextEditingController();
   final locationController = TextEditingController();
   final noteController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  String category = "";
+  String seconderyCategory = "";
+  String accountCardOrigin = "";
+
+  TransactionType get transactionType => controller.transactionType;
+  set transactionType(TransactionType value) =>
+      controller.setTransactionType(value);
+
+  DateTime get transactionDate => controller.transactionDate;
+  set transactionDate(DateTime value) => controller.setTransactionDate(value);
 
   @override
   void initState() {
     super.initState();
   }
 
-  void saveTransaction() {
-    var result = _formKey.currentState!.validate();
-    print(result);
+  void saveCallback() async {
+    var isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      await createNewTransaction();
+    } else {
+      showError("There are some incorret fields");
+    }
+  }
+
+  Future<void> createNewTransaction() async {
+    var newUserTransaction = UserTransaction(
+        note: noteController.text,
+        value: double.parse(valueController.text.replaceAll("€", "")),
+        transactionType: transactionType,
+        date: transactionDate,
+        category: category,
+        secondaryCategory: [seconderyCategory],
+        location: locationController.text,
+        origin: accountCardOrigin);
+
+    var isSuccesss = await controller.saveNewTransaction(newUserTransaction);
+    if (isSuccesss) {
+      Navigator.pop(context);
+    }
   }
 
   void showError(String errorMessage) {
@@ -45,10 +78,6 @@ class _RegisterTransactionPageState extends BaseStateWithController<
       content: Text(errorMessage),
     ));
   }
-
-  TextStyle buttonTextStyle() => const TextStyle(
-        fontSize: 16,
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +95,16 @@ class _RegisterTransactionPageState extends BaseStateWithController<
                   firstOption: TransactionType.credit.asString(),
                   secondOption: TransactionType.debit.asString(),
                   thirdOprion: TransactionType.revenue.asString(),
-                  selected: controller.transactionType.asString(),
-                  onChange: controller.setTransactionTypeFromString,
+                  selected: transactionType.asString(),
+                  onChange: (String value) =>
+                      transactionType = stringToTransactionTypeEnum(value),
                 ),
               ),
               const SizedBox(height: spaceBetweenFormItens),
               CashValue(controller: valueController),
               const SizedBox(height: spaceBetweenFormItens),
-              SelectCategory(selectCategory: controller.setCategory),
+              SelectCategory(
+                  selectCategory: (String value) => category = value),
               const SizedBox(height: spaceBetweenFormItens),
               const Divider(
                 color: Colors.black,
@@ -84,14 +115,14 @@ class _RegisterTransactionPageState extends BaseStateWithController<
               const SizedBox(height: spaceBetweenFormItens),
               SelectCategory(
                   isSeconderyCategory: true,
-                  selectCategory: controller.setSecondaryCategory),
+                  selectCategory: (String value) => seconderyCategory = value),
               const SizedBox(height: spaceBetweenFormItens),
               Observer(
                 builder: (_) => MyDatetimePicker(
                   modalMode: CupertinoDatePickerMode.date,
-                  value: controller.transactionDate,
+                  value: transactionDate,
                   onDateTimeChanged: (DateTime value) =>
-                      controller.setTransactionDate(value),
+                      transactionDate = value,
                 ),
               ),
               const SizedBox(height: spaceBetweenFormItens),
@@ -101,14 +132,14 @@ class _RegisterTransactionPageState extends BaseStateWithController<
               ),
               const SizedBox(height: spaceBetweenFormItens),
               AccountOrCardSelection(
-                  selectOrigin: (String value) => print(value)),
+                  selectOrigin: (String value) => accountCardOrigin = value),
               const SizedBox(height: spaceBetweenFormItens),
               NoteTextField(textController: noteController),
               const SizedBox(height: spaceBetweenFormItens),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SaveButton(onPressed: saveTransaction),
+                  SaveButton(onPressed: saveCallback),
                   const SizedBox(width: 20),
                   const CancelButton()
                 ],

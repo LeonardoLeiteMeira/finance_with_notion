@@ -10,6 +10,22 @@ part of 'register_transaction.controller.dart';
 
 mixin _$RegisterTransactionController
     on _RegisterTransactionControllerBase, Store {
+  late final _$isLoadingAtom = Atom(
+      name: '_RegisterTransactionControllerBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$transactionTypeAtom = Atom(
       name: '_RegisterTransactionControllerBase.transactionType',
       context: context);
@@ -24,55 +40,6 @@ mixin _$RegisterTransactionController
   set transactionType(TransactionType value) {
     _$transactionTypeAtom.reportWrite(value, super.transactionType, () {
       super.transactionType = value;
-    });
-  }
-
-  late final _$valueAtom =
-      Atom(name: '_RegisterTransactionControllerBase.value', context: context);
-
-  @override
-  double get value {
-    _$valueAtom.reportRead();
-    return super.value;
-  }
-
-  @override
-  set value(double value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
-    });
-  }
-
-  late final _$categoryAtom = Atom(
-      name: '_RegisterTransactionControllerBase.category', context: context);
-
-  @override
-  String get category {
-    _$categoryAtom.reportRead();
-    return super.category;
-  }
-
-  @override
-  set category(String value) {
-    _$categoryAtom.reportWrite(value, super.category, () {
-      super.category = value;
-    });
-  }
-
-  late final _$seconderyCategoryAtom = Atom(
-      name: '_RegisterTransactionControllerBase.seconderyCategory',
-      context: context);
-
-  @override
-  String get seconderyCategory {
-    _$seconderyCategoryAtom.reportRead();
-    return super.seconderyCategory;
-  }
-
-  @override
-  set seconderyCategory(String value) {
-    _$seconderyCategoryAtom.reportWrite(value, super.seconderyCategory, () {
-      super.seconderyCategory = value;
     });
   }
 
@@ -93,71 +60,29 @@ mixin _$RegisterTransactionController
     });
   }
 
-  late final _$locationAtom = Atom(
-      name: '_RegisterTransactionControllerBase.location', context: context);
-
-  @override
-  String get location {
-    _$locationAtom.reportRead();
-    return super.location;
-  }
-
-  @override
-  set location(String value) {
-    _$locationAtom.reportWrite(value, super.location, () {
-      super.location = value;
-    });
-  }
-
   late final _$_RegisterTransactionControllerBaseActionController =
       ActionController(
           name: '_RegisterTransactionControllerBase', context: context);
 
   @override
-  void setTransactionTypeFromString(String value) {
+  void setIsLoading(bool value) {
+    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
+        .startAction(name: '_RegisterTransactionControllerBase.setIsLoading');
+    try {
+      return super.setIsLoading(value);
+    } finally {
+      _$_RegisterTransactionControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setTransactionType(TransactionType value) {
     final _$actionInfo =
         _$_RegisterTransactionControllerBaseActionController.startAction(
-            name:
-                '_RegisterTransactionControllerBase.setTransactionTypeFromString');
+            name: '_RegisterTransactionControllerBase.setTransactionType');
     try {
-      return super.setTransactionTypeFromString(value);
-    } finally {
-      _$_RegisterTransactionControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setValue(double newValue) {
-    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
-        .startAction(name: '_RegisterTransactionControllerBase.setValue');
-    try {
-      return super.setValue(newValue);
-    } finally {
-      _$_RegisterTransactionControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCategory(String value) {
-    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
-        .startAction(name: '_RegisterTransactionControllerBase.setCategory');
-    try {
-      return super.setCategory(value);
-    } finally {
-      _$_RegisterTransactionControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setSecondaryCategory(String value) {
-    final _$actionInfo =
-        _$_RegisterTransactionControllerBaseActionController.startAction(
-            name: '_RegisterTransactionControllerBase.setSecondaryCategory');
-    try {
-      return super.setSecondaryCategory(value);
+      return super.setTransactionType(value);
     } finally {
       _$_RegisterTransactionControllerBaseActionController
           .endAction(_$actionInfo);
@@ -178,26 +103,11 @@ mixin _$RegisterTransactionController
   }
 
   @override
-  void setLocation(String value) {
-    final _$actionInfo = _$_RegisterTransactionControllerBaseActionController
-        .startAction(name: '_RegisterTransactionControllerBase.setLocation');
-    try {
-      return super.setLocation(value);
-    } finally {
-      _$_RegisterTransactionControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
+isLoading: ${isLoading},
 transactionType: ${transactionType},
-value: ${value},
-category: ${category},
-seconderyCategory: ${seconderyCategory},
-transactionDate: ${transactionDate},
-location: ${location}
+transactionDate: ${transactionDate}
     ''';
   }
 }

@@ -53,14 +53,14 @@ class NotionParser {
         properties[NotionDatabaseColumns.account.nameInNotionDatabase]);
 
     return UserTransaction(
-        transactionId,
-        note.value,
-        value.value,
-        stringToTransactionTypeEnum(expendType.value),
-        date.value,
-        category.value,
-        secondaryCategory.value,
-        location.value,
-        account.value);
+        id: transactionId,
+        note: note.value,
+        value: value.value,
+        transactionType: stringToTransactionTypeEnum(expendType.value),
+        date: date.value,
+        category: category.value,
+        secondaryCategory: secondaryCategory.value,
+        location: location.value,
+        origin: account.value);
   }
 }

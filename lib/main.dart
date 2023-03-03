@@ -13,12 +13,13 @@ class MyApp extends StatelessWidget {
       title: "Notion Finance App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-              //TODO fix main colors
-              backgroundColor: Color.fromARGB(255, 49, 62, 181)),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
-          textTheme: const TextTheme()),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+            //TODO fix main colors
+            backgroundColor: Color.fromARGB(255, 49, 62, 181)),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
+        textTheme: const TextTheme(),
+      ),
       home: const ExpensesPage(),
     );
   }
