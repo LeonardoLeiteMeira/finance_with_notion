@@ -3,7 +3,7 @@ import 'package:finance_with_notion/repository/transaction/notion_impl/enum/noti
 
 class NotionDate implements NotionTypeBase {
   @override
-  String id;
+  String? id;
 
   @override
   NotionPropertiesTypes type;
@@ -11,9 +11,20 @@ class NotionDate implements NotionTypeBase {
   @override
   DateTime value;
 
-  NotionDate(this.id, this.type, this.value);
+  NotionDate({this.id, required this.type, required this.value});
   NotionDate.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         type = NotionPropertiesTypes.date,
         value = DateTime.parse(json["date"]["start"]);
+
+  @override
+  Map<String, dynamic> getPropertyInNotionJson(String key) {
+    String date = value.toIso8601String();
+    return {
+      key: {
+        // ignore: unnecessary_string_interpolations
+        "date": {"start": date, "end": null}
+      },
+    };
+  }
 }

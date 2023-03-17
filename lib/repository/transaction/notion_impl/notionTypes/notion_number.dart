@@ -3,7 +3,7 @@ import 'package:finance_with_notion/repository/transaction/notion_impl/enum/noti
 
 class NotionNumber implements NotionTypeBase {
   @override
-  String id;
+  String? id;
 
   @override
   NotionPropertiesTypes type;
@@ -11,10 +11,15 @@ class NotionNumber implements NotionTypeBase {
   @override
   double value;
 
-  NotionNumber(this.id, this.type, this.value);
+  NotionNumber({this.id, required this.type, required this.value});
 
   NotionNumber.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         value = json["number"].toDouble(),
         type = NotionPropertiesTypes.number;
+
+  @override
+  Map<String, dynamic> getPropertyInNotionJson(String key) => {
+        key: {"number": value},
+      };
 }

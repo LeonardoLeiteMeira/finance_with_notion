@@ -3,7 +3,7 @@ import 'package:finance_with_notion/repository/transaction/notion_impl/enum/noti
 
 class NotionMultiSelect implements NotionTypeBase {
   @override
-  String id;
+  String? id;
 
   @override
   NotionPropertiesTypes type;
@@ -11,7 +11,7 @@ class NotionMultiSelect implements NotionTypeBase {
   @override
   List<String> value;
 
-  NotionMultiSelect(this.id, this.type, this.value);
+  NotionMultiSelect({this.id, required this.type, required this.value});
   NotionMultiSelect.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         type = NotionPropertiesTypes.multiSelect,
@@ -27,4 +27,11 @@ class NotionMultiSelect implements NotionTypeBase {
     }
     return selectValues;
   }
+
+  @override
+  Map<String, dynamic> getPropertyInNotionJson(String key) => {
+        key: {
+          "multi_select": (value.map((e) => {"name": e})).toList()
+        },
+      };
 }

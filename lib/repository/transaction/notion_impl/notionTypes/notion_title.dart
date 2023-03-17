@@ -1,9 +1,10 @@
+import 'package:finance_with_notion/repository/transaction/notion_impl/enum/notion_database_columns_enum.dart';
 import 'package:finance_with_notion/repository/transaction/notion_impl/notionTypes/notion_type_base.dart';
 import 'package:finance_with_notion/repository/transaction/notion_impl/enum/notion_properties_types_enum.dart';
 
-class NotionTitle implements NotionTypeBase {
+class NotionTitle implements NotionTypeBase<String> {
   @override
-  String id;
+  String? id;
 
   @override
   NotionPropertiesTypes type;
@@ -11,13 +12,13 @@ class NotionTitle implements NotionTypeBase {
   @override
   String value;
 
-  NotionTitle(this.id, this.type, this.value);
+  NotionTitle({this.id, required this.type, required this.value});
   NotionTitle.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         type = NotionPropertiesTypes.title,
-        value = __titleToListString(json);
+        value = _titleToListString(json);
 
-  static String __titleToListString(Map<String, dynamic> titleProperty) {
+  static String _titleToListString(Map<String, dynamic> titleProperty) {
     var titleList = titleProperty["title"];
     String title = "";
     for (var titleItem in titleList) {
@@ -26,4 +27,15 @@ class NotionTitle implements NotionTypeBase {
 
     return title;
   }
+
+  @override
+  Map<String, dynamic> getPropertyInNotionJson(String key) => {
+        key: {
+          "title": [
+            {
+              "text": {"content": value}
+            }
+          ]
+        }
+      };
 }

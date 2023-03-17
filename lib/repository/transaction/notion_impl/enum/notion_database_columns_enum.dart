@@ -2,13 +2,13 @@ import 'notion_properties_types_enum.dart';
 
 enum NotionDatabaseColumns {
   name,
-  type,
+  note,
   value,
+  type,
+  date,
   category,
   secondaryCategory,
-  date,
   location,
-  note,
   account
 }
 
@@ -59,7 +59,7 @@ extension NotionDatabaseColumnsName on NotionDatabaseColumns {
         return NotionPropertiesTypes.select;
 
       case NotionDatabaseColumns.secondaryCategory:
-        return NotionPropertiesTypes.select;
+        return NotionPropertiesTypes.multiSelect;
 
       case NotionDatabaseColumns.date:
         return NotionPropertiesTypes.date;
