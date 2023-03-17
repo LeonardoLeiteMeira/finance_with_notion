@@ -9,6 +9,7 @@ import 'package:finance_with_notion/shared/models/user_transaction_list_model.da
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'model/user_transaction_notion_extension.dart';
 import 'notion_parser.dart';
 
 @LazySingleton(as: TransactionDatabase)
@@ -90,8 +91,19 @@ class NotionDatabase implements TransactionDatabase {
   ///post in https://api.notion.com/v1/pages/
   @override
   Future<bool> insertTransaction(UserTransaction userTransaction) async {
-    return false;
-    // TODO: implement insertTransaction
+    var notionPageAsJson = _notionParser.userTransactionToNotionPage(
+        UserTransactionToNotionExtension.fromUserTransaction(userTransaction),
+        _sharedPrefs.notionDatabaseId);
+
+    var fullUrl = _notionApiUrl + "/pages";
+
+    var response = await _httpRequest.post(fullUrl, body: notionPageAsJson);
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    throw (NotionError(
+        "${response.statusCode} - ${response.statusMessage} - ${response.data}"));
   }
 
   Future<NotionDatabaseMetadata> _getDatabaseProperties() async {
