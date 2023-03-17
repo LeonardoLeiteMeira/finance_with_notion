@@ -39,11 +39,12 @@ class _MyDropdownState extends State<MyDropdown> {
 
   void onClickSelectButton(modalContext) {
     if (selectedItem == null) {
+      var firstItem = 0;
+      selectItem(firstItem);
       setState(() {
-        selectedItem = 0;
+        selectedItem = firstItem;
       });
     }
-    selectedItem;
     Navigator.pop(modalContext);
   }
 
