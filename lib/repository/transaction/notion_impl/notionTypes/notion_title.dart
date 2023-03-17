@@ -29,13 +29,18 @@ class NotionTitle implements NotionTypeBase<String> {
   }
 
   @override
-  Map<String, dynamic> getPropertyInNotionJson(String key) => {
-        key: {
-          "title": [
-            {
-              "text": {"content": value}
-            }
-          ]
-        }
-      };
+  Map<String, dynamic>? getPropertyInNotionJson(String key) {
+    if (value == "") {
+      return null;
+    }
+    return {
+      key: {
+        "title": [
+          {
+            "text": {"content": value}
+          }
+        ]
+      }
+    };
+  }
 }

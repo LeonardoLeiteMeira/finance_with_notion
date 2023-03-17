@@ -22,7 +22,6 @@ class NotionDate implements NotionTypeBase {
     String date = value.toIso8601String();
     return {
       key: {
-        // ignore: unnecessary_string_interpolations
         "date": {"start": date, "end": null}
       },
     };

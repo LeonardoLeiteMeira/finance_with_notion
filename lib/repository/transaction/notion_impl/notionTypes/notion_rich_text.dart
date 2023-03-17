@@ -30,13 +30,18 @@ class NotionRichText implements NotionTypeBase {
   }
 
   @override
-  Map<String, dynamic> getPropertyInNotionJson(String key) => {
-        key: {
-          "rich_text": [
-            {
-              "text": {"content": value}
-            }
-          ]
-        },
-      };
+  Map<String, dynamic>? getPropertyInNotionJson(String key) {
+    if (value == "") {
+      return null;
+    }
+    return {
+      key: {
+        "rich_text": [
+          {
+            "text": {"content": value}
+          }
+        ]
+      },
+    };
+  }
 }

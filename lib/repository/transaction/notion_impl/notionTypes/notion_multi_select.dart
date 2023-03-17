@@ -29,9 +29,25 @@ class NotionMultiSelect implements NotionTypeBase {
   }
 
   @override
-  Map<String, dynamic> getPropertyInNotionJson(String key) => {
-        key: {
-          "multi_select": (value.map((e) => {"name": e})).toList()
-        },
-      };
+  Map<String, dynamic>? getPropertyInNotionJson(String key) {
+    dynamic checkedValue;
+    if (_isValueEmpty()) {
+      return null;
+    } else {
+      checkedValue = (value.map((e) => {"name": e})).toList();
+    }
+    return {
+      key: {"multi_select": checkedValue},
+    };
+  }
+
+  bool _isValueEmpty() {
+    if (value.isEmpty) {
+      return true;
+    } else if (value.first == "") {
+      return true;
+    }
+
+    return false;
+  }
 }

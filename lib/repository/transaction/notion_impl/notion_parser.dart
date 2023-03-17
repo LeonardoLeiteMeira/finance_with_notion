@@ -82,40 +82,56 @@ class NotionParser {
       }
     });
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionNote.getPropertyInNotionJson(
             NotionDatabaseColumns.note.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionValue.getPropertyInNotionJson(
             NotionDatabaseColumns.value.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionTransactionType.getPropertyInNotionJson(
             NotionDatabaseColumns.type.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionDate.getPropertyInNotionJson(
             NotionDatabaseColumns.date.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionCategory.getPropertyInNotionJson(
             NotionDatabaseColumns.category.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionSecondaryCategory.getPropertyInNotionJson(
             NotionDatabaseColumns.secondaryCategory.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionLocation.getPropertyInNotionJson(
             NotionDatabaseColumns.location.nameInNotionDatabase));
 
-    (notionJsonPage["properties"] as Map<String, dynamic>).addAll(
+    notionJsonPage["properties"] = _checkPrpertyToAdd(
+        notionJsonPage["properties"],
         userTransaction.notionOrigin.getPropertyInNotionJson(
             NotionDatabaseColumns.account.nameInNotionDatabase));
 
     print(notionJsonPage);
 
     return notionJsonPage;
+  }
+
+  Map<String, dynamic> _checkPrpertyToAdd(
+      Map<String, dynamic> json, Map<String, dynamic>? jsonToCheck) {
+    if (jsonToCheck != null) {
+      json.addAll(jsonToCheck);
+    }
+    return json;
   }
 }

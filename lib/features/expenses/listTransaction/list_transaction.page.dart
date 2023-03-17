@@ -36,7 +36,7 @@ class _ListTransactionPageState extends BaseStateWithController<
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: controller.addTransaction,
+        onPressed: controller.navigateToCreateTransactionPage,
       ),
     );
   }

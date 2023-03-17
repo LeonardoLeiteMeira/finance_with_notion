@@ -11,7 +11,7 @@ abstract class NotionTypeBase<T> {
   T get value;
   NotionPropertiesTypes get type;
 
-  Map<String, dynamic> getPropertyInNotionJson(String key);
+  Map<String, dynamic>? getPropertyInNotionJson(String key);
 
   static NotionTypeBase initNotionType<T>(
       {String? id, required NotionPropertiesTypes type, required T value}) {

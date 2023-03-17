@@ -1,3 +1,4 @@
+import 'package:finance_with_notion/shared/models/user_transaction.model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:finance_with_notion/shared/models/generic/data_state.dart';
@@ -25,7 +26,13 @@ abstract class _ListTransactionControllerBase with Store {
         .resultCompleteSet(userTransactionsState);
   }
 
-  void addTransaction() {
+  void addTransaction(UserTransaction newUserTransaction) {
+    var transactionList = userTransactionsState.data;
+    transactionList?.userTransactions.insert(0, newUserTransaction);
+    userTransactionsState.setData(transactionList!);
+  }
+
+  void navigateToCreateTransactionPage() {
     var expensesController = GetIt.I.get<ExpensesController>();
     expensesController.setCreateNewTransaction(true);
   }

@@ -15,12 +15,18 @@ class NotionSelect implements NotionTypeBase<String> {
   NotionSelect.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         type = NotionPropertiesTypes.select,
-        value = json["select"]["name"];
+        value = json["select"]?["name"] ?? "";
 
   @override
-  Map<String, dynamic> getPropertyInNotionJson(String key) => {
-        key: {
-          "select": {"name": value}
-        },
-      };
+  Map<String, dynamic>? getPropertyInNotionJson(String key) {
+    if (value == "") {
+      return null;
+    }
+
+    return {
+      key: {
+        "select": {"name": value}
+      },
+    };
+  }
 }
