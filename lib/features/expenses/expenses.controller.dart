@@ -13,4 +13,12 @@ abstract class _ExpensesControllerBase with Store {
   void setCreateNewTransaction(bool value) {
     createNewTransaction = value;
   }
+
+  @observable
+  bool seeDetailsPage = false;
+
+  @action
+  void setSeeDetailsPageTransaction(bool value) {
+    seeDetailsPage = value;
+  }
 }

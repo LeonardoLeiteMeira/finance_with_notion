@@ -36,4 +36,9 @@ abstract class _ListTransactionControllerBase with Store {
     var expensesController = GetIt.I.get<ExpensesController>();
     expensesController.setCreateNewTransaction(true);
   }
+
+  void navigateToSeeDatailsPage() {
+    var expensesController = GetIt.I.get<ExpensesController>();
+    expensesController.setSeeDetailsPageTransaction(true);
+  }
 }

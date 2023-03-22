@@ -26,6 +26,22 @@ mixin _$ExpensesController on _ExpensesControllerBase, Store {
     });
   }
 
+  late final _$seeDetailsPageAtom =
+      Atom(name: '_ExpensesControllerBase.seeDetailsPage', context: context);
+
+  @override
+  bool get seeDetailsPage {
+    _$seeDetailsPageAtom.reportRead();
+    return super.seeDetailsPage;
+  }
+
+  @override
+  set seeDetailsPage(bool value) {
+    _$seeDetailsPageAtom.reportWrite(value, super.seeDetailsPage, () {
+      super.seeDetailsPage = value;
+    });
+  }
+
   late final _$_ExpensesControllerBaseActionController =
       ActionController(name: '_ExpensesControllerBase', context: context);
 
@@ -41,9 +57,21 @@ mixin _$ExpensesController on _ExpensesControllerBase, Store {
   }
 
   @override
+  void setSeeDetailsPageTransaction(bool value) {
+    final _$actionInfo = _$_ExpensesControllerBaseActionController.startAction(
+        name: '_ExpensesControllerBase.setSeeDetailsPageTransaction');
+    try {
+      return super.setSeeDetailsPageTransaction(value);
+    } finally {
+      _$_ExpensesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-createNewTransaction: ${createNewTransaction}
+createNewTransaction: ${createNewTransaction},
+seeDetailsPage: ${seeDetailsPage}
     ''';
   }
 }

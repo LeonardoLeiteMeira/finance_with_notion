@@ -177,7 +177,7 @@ class _ListTransactionPageState extends BaseStateWithController<
             style: TextStyle(fontSize: 18),
           ),
           style: ElevatedButton.styleFrom(),
-          onPressed: () {},
+          onPressed: () => controller.navigateToSeeDatailsPage(),
         ),
       );
 }
